@@ -1,0 +1,1169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wellbeing Culture Compass - Paradigma B</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #8F579F 0%, #47c0ef 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #8F579F 0%, #47c0ef 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+        .brand { font-size: 24px; font-weight: 700; margin-bottom: 5px; }
+        .subtitle { font-size: 18px; opacity: 0.95; font-weight: 300; }
+        h1 { font-size: 32px; font-weight: 700; margin-bottom: 10px; }
+        .content { padding: 40px 30px; }
+        .section-title {
+            color: #8F579F;
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #47c0ef;
+        }
+        .intro-text {
+            background: #f0f8ff;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            border-left: 4px solid #47c0ef;
+            font-size: 16px;
+            line-height: 1.8;
+        }
+        .form-group { margin-bottom: 25px; }
+        .form-group label {
+            display: block;
+            color: #333;
+            font-weight: 500;
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        .form-group input:focus { outline: none; border-color: #47c0ef; }
+        .btn {
+            background: linear-gradient(135deg, #8F579F 0%, #47c0ef 100%);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(143, 87, 159, 0.4);
+        }
+        .btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+        .hidden { display: none !important; }
+        .dimension-header {
+            background: linear-gradient(135deg, #8F579F 0%, #47c0ef 100%);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin: 30px 0 20px 0;
+            font-size: 20px;
+            font-weight: 600;
+        }
+        .question-block {
+            background: #f9f9f9;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #8F579F;
+        }
+        .question-text {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        .options-container { display: flex; gap: 15px; flex-wrap: wrap; }
+        .option-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            padding: 10px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            transition: all 0.3s;
+            background: white;
+            flex: 1;
+            min-width: 200px;
+        }
+        .option-label:hover { border-color: #47c0ef; background: #f0f8ff; }
+        .option-label input[type="radio"] {
+            accent-color: #8F579F;
+            width: 20px;
+            height: 20px;
+        }
+        .option-label.selected { border-color: #8F579F; background: #f3e6f7; }
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: #e0e0e0;
+            border-radius: 5px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(135deg, #8F579F 0%, #47c0ef 100%);
+            transition: width 0.3s;
+            width: 0%;
+        }
+        .global-score {
+            background: linear-gradient(135deg, #8F579F 0%, #47c0ef 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .global-score h2 { font-size: 48px; margin-bottom: 10px; }
+        .semaforo-container { display: flex; flex-direction: column; gap: 15px; margin: 30px 0; }
+        .semaforo-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border-radius: 10px;
+            transition: transform 0.2s;
+            color: white;
+        }
+        .semaforo-item:hover { transform: translateX(5px); }
+        .semaforo-critico { background: linear-gradient(to right, #ff4444, #ff6666); border-left: 6px solid #cc0000; }
+        .semaforo-riesgo { background: linear-gradient(to right, #ffaa00, #ffcc44); border-left: 6px solid #cc8800; }
+        .semaforo-desarrollo { background: linear-gradient(to right, #44aaff, #66bbff); border-left: 6px solid #0088cc; }
+        .semaforo-solido { background: linear-gradient(to right, #44ff44, #66ff66); border-left: 6px solid #00cc00; }
+        .semaforo-label { font-weight: 700; font-size: 18px; flex: 1; }
+        .semaforo-score { font-size: 24px; font-weight: 700; padding: 0 20px; }
+        .score-card {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 5px solid #8F579F;
+        }
+        .score-card h3 { color: #8F579F; margin-bottom: 10px; }
+        .status-badge {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 700;
+            margin: 10px 0;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .status-critico { background: #ff4444; color: white; }
+        .status-en-riesgo { background: #ffaa00; color: white; }
+        .status-en-desarrollo { background: #44aaff; color: white; }
+        .status-sólido { background: #44ff44; color: white; }
+        .alert-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        .alert-box.danger { background: #ffebee; border-left-color: #f44336; }
+        .alert-box h4 { color: #d32f2f; margin-bottom: 10px; }
+        .insight-box {
+            background: #e8f4f8;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #0288d1;
+        }
+        .insight-box strong { color: #0288d1; }
+        .recommendation {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            border: 2px solid #8F579F;
+        }
+        .recommendation h4 { color: #8F579F; margin-bottom: 10px; }
+        .recommendation ul { margin-left: 20px; }
+        .recommendation li { margin-bottom: 8px; line-height: 1.6; }
+        .strategy-highlight {
+            background: #f3e6f7;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            border-left: 4px solid #8F579F;
+        }
+        .phase-box {
+            background: white;
+            border: 2px solid #8F579F;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+        .phase-box h4 { color: #8F579F; margin-bottom: 15px; font-size: 18px; }
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .metric-card {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+        }
+        .metric-value { font-size: 36px; font-weight: 700; color: #8F579F; margin: 10px 0; }
+        .metric-label { color: #666; font-size: 14px; }
+        .footer {
+            background: #f0f0f0;
+            padding: 20px;
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+        }
+        @media print {
+            body { background: white; }
+            .btn { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="brand">Paradigma B</div>
+            <div class="subtitle">Una nueva visión del Bienestar Organizacional</div>
+            <h1>Wellbeing Culture Compass</h1>
+            <p class="subtitle">Evalúa la cultura de bienestar en tu organización</p>
+        </div>
+
+        <div id="userDataSection" class="content">
+            <h2 class="section-title">Información del Evaluador</h2>
+            <div class="intro-text">
+                <p>Bienvenido/a al Wellbeing Culture Compass de Paradigma B. Esta evaluación te permitirá diagnosticar qué tanto se ha integrado el bienestar en la cultura de tu empresa utilizando nuestro Framework PB-6.</p>
+                <p style="margin-top: 10px;">Por favor, completa tus datos para comenzar:</p>
+            </div>
+            
+            <div class="form-group">
+                <label>Nombre completo *</label>
+                <input type="text" id="nombre" required>
+            </div>
+            <div class="form-group">
+                <label>Cargo *</label>
+                <input type="text" id="cargo" required>
+            </div>
+            <div class="form-group">
+                <label>Empresa *</label>
+                <input type="text" id="empresa" required>
+            </div>
+            <div class="form-group">
+                <label>Correo electrónico *</label>
+                <input type="email" id="correo" required>
+            </div>
+            <div class="form-group">
+                <label>Celular *</label>
+                <input type="tel" id="celular" required>
+            </div>
+            <div class="form-group">
+                <label style="display:flex; gap:10px; align-items:flex-start; font-weight:400; cursor:pointer;">
+                    <input type="checkbox" id="consentimiento" style="width:20px; height:20px; margin-top:3px; flex-shrink:0; accent-color:#8F579F;">
+                    <span>Acepto que Paradigma B use estos datos y mis respuestas para enviarme el resultado y contactarme. *</span>
+                </label>
+            </div>
+
+            <button class="btn" onclick="comenzarEvaluacion()">Comenzar Evaluación</button>
+        </div>
+
+        <div id="assessmentSection" class="content hidden">
+            <div class="intro-text">
+                <p><strong>Instrucciones:</strong> Evalúa las siguientes afirmaciones según tu percepción actual en la empresa, aplicando nuestro Framework PB-6.</p>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar"></div>
+            </div>
+            <p style="text-align: center; color: #666; margin-bottom: 30px;">
+                Pregunta <span id="currentQuestion">0</span> de <span id="totalQuestions">29</span>
+            </p>
+            <div id="questionsContainer"></div>
+            <button class="btn" onclick="generarReporte()">Generar Reporte de Resultados</button>
+        </div>
+
+        <div id="resultsSection" class="content hidden">
+            <h2 class="section-title">Reporte de Resultados</h2>
+            <div id="resultsContent"></div>
+            <div style="margin-top: 30px; display: flex; gap: 15px; flex-wrap: wrap;">
+                <button class="btn" onclick="location.reload()">Nueva Evaluación</button>
+                <button class="btn" onclick="window.open(CAL_URL, '_blank', 'noopener')" style="background: linear-gradient(135deg, #47c0ef 0%, #8F579F 100%);">
+                    📅 Agendar Reunión con Nuestro Equipo
+                </button>
+            </div>
+        </div>
+
+        <div class="footer">© 2025 Paradigma B. Todos los derechos reservados.</div>
+    </div>
+    <script>
+        /* CONFIGURACIÓN — lo único que quizá tengas que tocar */
+        const SUPABASE_URL = "https://tforsnpextacsjlvykrv.supabase.co";
+        const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRmb3JzbnBleHRhY3NqbHZ5a3J2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODk3Nzg1NzMsImV4cCI6MjEwNTM1NDU3M30.DCUCHGuPJR6K9kSRG0W4rf7VafUSZ4DyHjj2nvzGBvY";
+        const TABLA = "leads_compass";
+        const CAL_URL = "https://cal.com/paradigmab/conoce-nuestro-portafolio";
+
+        let userData = {};
+        let responses = {};
+        
+        const dimensions = {
+            liderazgo: {
+                name: "Liderazgo y Propósito",
+                questions: [
+                    "Los Líderes a través de su direccionamiento, comunicación e interacción con sus equipos crean condiciones seguras para que el empleado se sienta incluido, con seguridad para aprender, con seguridad para contribuir y con seguridad para innovar.",
+                    "La organización tiene definido un propósito que inspira y conecta emocionalmente con los empleados.",
+                    "Hay coherencia entre los comportamientos de los líderes y los valores corporativos, por lo tanto, son percibidos como modelos para seguir.",
+                    "Los líderes conducen sus decisiones teniendo en cuenta los intereses de la empresa y el bienestar de sus empleados."
+                ]
+            },
+            saludMental: {
+                name: "Salud Mental",
+                questions: [
+                    "La empresa dispone de algún sistema para monitorear la salud mental de sus empleados.",
+                    "La empresa educa y capacita permanentemente (no solo en fechas especiales) a sus colaboradores sobre señales, síntomas, protocolos de detección y formas de obtener ayuda especializada.",
+                    "La empresa dispone de recursos propios o a través de terceros para atender la salud mental (psicólogos, terapeutas, psiquiatras, aplicaciones u otros).",
+                    "La empresa cuenta con embajadores internos certificados en Primeros Auxilios Psicológicos.",
+                    "La empresa ha creado espacios seguros para derribar estigmas y hablar abiertamente sobre la salud mental y padecimientos relacionados."
+                ]
+            },
+            bienestarFinanciero: {
+                name: "Bienestar Financiero",
+                questions: [
+                    "La empresa ha realizado un estudio integral sobre la situación económica y financiera de sus colaboradores.",
+                    "La empresa tiene programas de educación financiera que incluyen seguimiento personalizado.",
+                    "La empresa prioriza beneficios que impulsan el crecimiento personal y profesional del empleado, en lugar de incrementar sus niveles de endeudamiento.",
+                    "La empresa tiene políticas de sueldos y remuneraciones que se fundamentan en la transparencia, competitividad con el mercado y equidad salarial.",
+                    "La empresa dispone por cuenta propia o través de terceros de productos financieros tales como: ahorro programado, fondos de retiro y fondos de inversión para sus colaboradores."
+                ]
+            },
+            desarrolloProfesional: {
+                name: "Desarrollo Profesional",
+                questions: [
+                    "La empresa tiene un sistema para monitorear y gestionar la contribución y el desempeño de sus colaboradores.",
+                    "La empresa ha institucionalizada las prácticas de feedback, feedforward y de reconocimiento.",
+                    "La empresa ha implementados rutas de carrera, planes de sucesión y programas de desarrollo diferenciados para talentos destacados.",
+                    "La empresa cuenta con Academias Corporativas y Sistemas de Gestión del Conocimiento que aseguren el aprendizaje significativo y el desarrollo de nuevas habilidades.",
+                    "La empresa tiene prácticas de movilidad interna o externa."
+                ]
+            },
+            energiaVital: {
+                name: "Energía Vital",
+                questions: [
+                    "La empresa tiene un sistema de monitoreo y vigilancia de la salud que integra oportunamente los resultados de exámenes ocupacionales, resultados de morbilidad y metas de salud de sus empleados.",
+                    "La empresa tiene un sistema para monitorear y detectar patrones que afecten la calidad de descanso y sueño de los empleados.",
+                    "Además de las conocidas pausas activas, la empresa cuenta con recursos propios o de terceros para activar permanentemente el ejercicio físico.",
+                    "Además, de la semana de la salud. La empresa provee asesoría nutricional y educación sobre hábitos alimenticios a nivel preventivo y para empleados que ya tienen un diagnóstico.",
+                    "La empresa educa de forma permanente sobre señales, síntomas y formas de prevención de enfermedades metabólicas, cardiovasculares, autoinmunes y otras."
+                ]
+            },
+            sostenibilidad: {
+                name: "Sostenibilidad",
+                questions: [
+                    "La empresa cuenta con una estrategia de bienestar que tiene la misma relevancia que la estrategia de negocio, por lo tanto, cuenta con respaldo de la alta dirección, tiene estructura, tecnología, presupuesto y equipo de trabajo.",
+                    "La empresa está comprometida con la equidad de género, con garantizar espacios de trabajo seguros y libres de cualquier forma de violencia, discriminación y acoso.",
+                    "La empresa tiene un código de principios de negocio difundido entre sus grupos de interés.",
+                    "La empresa practica las 3R: reciclaje, reducción y reutilización y además promueve formas de consumo consciente entre sus colaboradores especialmente de aquellos recursos no renovables.",
+                    "La empresa tiene programas de voluntariado comprometidos con una causa ambiental o social de largo plazo (no para fechas especiales)."
+                ]
+            }
+        };
+        
+        function comenzarEvaluacion() {
+            const nombre = document.getElementById('nombre').value.trim();
+            const cargo = document.getElementById('cargo').value.trim();
+            const empresa = document.getElementById('empresa').value.trim();
+            const correo = document.getElementById('correo').value.trim();
+            const celular = document.getElementById('celular').value.trim();
+            
+            if (!nombre || !cargo || !empresa || !correo || !celular) {
+                alert('Por favor, completa todos los campos antes de continuar.');
+                return;
+            }
+
+            if (!document.getElementById('consentimiento').checked) {
+                alert('Necesitamos tu autorización para enviarte el resultado y contactarte.');
+                return;
+            }
+            
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(correo)) {
+                alert('Por favor, ingresa un correo electrónico válido.');
+                return;
+            }
+            
+            userData = { nombre, cargo, empresa, correo, celular };
+            document.getElementById('userDataSection').classList.add('hidden');
+            document.getElementById('assessmentSection').classList.remove('hidden');
+            renderizarPreguntas();
+            window.scrollTo(0, 0);
+        }
+        
+        function renderizarPreguntas() {
+            const container = document.getElementById('questionsContainer');
+            container.innerHTML = '';
+            let questionIndex = 0;
+            let totalQuestions = 0;
+            
+            Object.keys(dimensions).forEach(dimKey => {
+                totalQuestions += dimensions[dimKey].questions.length;
+            });
+            
+            document.getElementById('totalQuestions').textContent = totalQuestions;
+            
+            Object.keys(dimensions).forEach(dimKey => {
+                const dimension = dimensions[dimKey];
+                const header = document.createElement('div');
+                header.className = 'dimension-header';
+                header.textContent = dimension.name;
+                container.appendChild(header);
+                
+                dimension.questions.forEach((question, qIndex) => {
+                    questionIndex++;
+                    const block = document.createElement('div');
+                    block.className = 'question-block';
+                    
+                    const text = document.createElement('div');
+                    text.className = 'question-text';
+                    text.innerHTML = `<strong>${questionIndex}.</strong> ${question}`;
+                    block.appendChild(text);
+                    
+                    const optionsDiv = document.createElement('div');
+                    optionsDiv.className = 'options-container';
+                    
+                    const options = [
+                        { value: 0, label: 'No implementado' },
+                        { value: 1, label: 'Implementado de forma parcial' },
+                        { value: 2, label: 'Implementado de forma completa y sostenida' }
+                    ];
+                    
+                    options.forEach(option => {
+                        const label = document.createElement('label');
+                        label.className = 'option-label';
+                        const radio = document.createElement('input');
+                        radio.type = 'radio';
+                        radio.name = `${dimKey}_${qIndex}`;
+                        radio.value = option.value;
+                        radio.onchange = function() {
+                            actualizarProgreso();
+                            document.querySelectorAll(`input[name="${dimKey}_${qIndex}"]`).forEach(r => {
+                                r.parentElement.classList.remove('selected');
+                            });
+                            this.parentElement.classList.add('selected');
+                        };
+                        const span = document.createElement('span');
+                        span.textContent = option.label;
+                        label.appendChild(radio);
+                        label.appendChild(span);
+                        optionsDiv.appendChild(label);
+                    });
+                    
+                    block.appendChild(optionsDiv);
+                    container.appendChild(block);
+                });
+            });
+        }
+        
+        function actualizarProgreso() {
+            let answered = 0;
+            let total = 0;
+            Object.keys(dimensions).forEach(dimKey => {
+                dimensions[dimKey].questions.forEach((q, qIndex) => {
+                    total++;
+                    const radio = document.querySelector(`input[name="${dimKey}_${qIndex}"]:checked`);
+                    if (radio) answered++;
+                });
+            });
+            const progress = (answered / total) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+            document.getElementById('currentQuestion').textContent = answered;
+        }
+        
+        function generarReporte() {
+            responses = {};
+            let allAnswered = true;
+            
+            Object.keys(dimensions).forEach(dimKey => {
+                responses[dimKey] = [];
+                dimensions[dimKey].questions.forEach((q, qIndex) => {
+                    const radio = document.querySelector(`input[name="${dimKey}_${qIndex}"]:checked`);
+                    if (radio) {
+                        responses[dimKey].push(parseInt(radio.value));
+                    } else {
+                        allAnswered = false;
+                    }
+                });
+            });
+            
+            if (!allAnswered) {
+                alert('Por favor, responde todas las preguntas antes de generar el reporte.');
+                return;
+            }
+            
+            const results = calcularResultados();
+            guardarLead(results);
+            mostrarResultados(results);
+            document.getElementById('assessmentSection').classList.add('hidden');
+            document.getElementById('resultsSection').classList.remove('hidden');
+            window.scrollTo(0, 0);
+        }
+
+        
+        function nivelGlobal(pct) {
+            if (pct <= 35) return 'CRISIS ORGANIZACIONAL';
+            if (pct <= 55) return 'OPORTUNIDAD DE TRANSFORMACIÓN';
+            if (pct <= 75) return 'CULTURA EN CONSTRUCCIÓN';
+            return 'CULTURA MADURA';
+        }
+
+        /* Guarda el lead sin bloquear el reporte: si falla, la persona igual ve sus resultados. */
+        let leadGuardado = false;
+        async function guardarLead(results) {
+            if (leadGuardado) return;
+            leadGuardado = true;
+            const payload = {
+                nombre: userData.nombre,
+                cargo: userData.cargo,
+                empresa: userData.empresa,
+                correo: userData.correo,
+                celular: userData.celular,
+                puntaje_total: results.totalScore,
+                porcentaje_global: Number(results.globalPercentage.toFixed(1)),
+                nivel_global: nivelGlobal(results.globalPercentage),
+                respuestas: responses,
+                resultados: results.dimensions
+            };
+            try {
+                const res = await fetch(`${SUPABASE_URL}/rest/v1/${TABLA}`, {
+                    method: 'POST',
+                    headers: {
+                        'apikey': SUPABASE_KEY,
+                        'Authorization': 'Bearer ' + SUPABASE_KEY,
+                        'Content-Type': 'application/json',
+                        'Prefer': 'return=minimal'
+                    },
+                    body: JSON.stringify(payload)
+                });
+                if (!res.ok) throw new Error(await res.text());
+            } catch (err) {
+                leadGuardado = false;
+                console.error('No se pudo guardar el lead', err);
+            }
+        }
+
+        function calcularResultados() {
+            const results = {
+                dimensions: {},
+                totalScore: 0,
+                totalMax: 58,  // 4+5+5+5+5+5 = 29 preguntas x 2 puntos max
+                globalPercentage: 0,
+                criticalDimensions: [],
+                riskDimensions: [],
+                developmentDimensions: [],
+                solidDimensions: []
+            };
+            
+            Object.keys(dimensions).forEach(dimKey => {
+                const dimension = dimensions[dimKey];
+                const score = responses[dimKey].reduce((a, b) => a + b, 0);
+                const maxScore = dimension.questions.length * 2;  // Cada pregunta vale máximo 2 puntos
+                const percentage = (score / maxScore) * 100;
+                
+                let status = '';
+                if (percentage <= 40) {
+                    status = 'CRÍTICO';
+                    results.criticalDimensions.push(dimKey);
+                } else if (percentage <= 65) {
+                    status = 'EN RIESGO';
+                    results.riskDimensions.push(dimKey);
+                } else if (percentage <= 80) {
+                    status = 'EN DESARROLLO';
+                    results.developmentDimensions.push(dimKey);
+                } else {
+                    status = 'SÓLIDO';
+                    results.solidDimensions.push(dimKey);
+                }
+                
+                results.dimensions[dimKey] = {
+                    name: dimension.name,
+                    score: score,
+                    maxScore: maxScore,
+                    percentage: percentage,
+                    status: status
+                };
+                
+                results.totalScore += score;
+            });
+            
+            results.globalPercentage = (results.totalScore / results.totalMax) * 100;
+            return results;
+        }
+        
+        function mostrarResultados(results) {
+            const container = document.getElementById('resultsContent');
+            const globalLevel = nivelGlobal(results.globalPercentage);
+            
+            const dimensionsArray = Object.keys(results.dimensions).map(key => ({
+                key: key,
+                ...results.dimensions[key]
+            })).sort((a, b) => a.percentage - b.percentage);
+            
+            let html = `
+                <div class="global-score">
+                    <h2>${results.globalPercentage.toFixed(1)}%</h2>
+                    <p style="font-size: 24px; font-weight: 600;">${globalLevel}</p>
+                    <p style="font-size: 14px; margin-top: 15px; opacity: 0.85;">
+                        Puntuación total: ${results.totalScore} de ${results.totalMax} puntos
+                    </p>
+                </div>
+
+                <div class="recommendation">
+                    <h3 style="color: #8F579F; font-size: 22px; margin-bottom: 15px;">📊 Resumen Ejecutivo</h3>
+                    <p><strong>Empresa:</strong> ${userData.empresa}</p>
+                    <p><strong>Evaluado por:</strong> ${userData.nombre}</p>
+                    <p><strong>Cargo:</strong> ${userData.cargo}</p>
+                    <p><strong>Fecha:</strong> ${new Date().toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+                    <h4 style="color: #8F579F; margin-top: 20px; margin-bottom: 10px;">Diagnóstico General</h4>
+                    <p style="line-height: 1.8;">${getResumenEjecutivo(results)}</p>
+                    <h4 style="color: #d32f2f; margin-top: 20px; margin-bottom: 10px;">🚨 Top 3 Dimensiones Prioritarias</h4>
+                    <ol style="margin-left: 20px;">
+                        ${dimensionsArray.slice(0, 3).map(dim => `
+                            <li style="margin-bottom: 8px;">
+                                <strong>${dim.name}</strong>: ${dim.percentage.toFixed(1)}% - ${dim.status}
+                            </li>
+                        `).join('')}
+                    </ol>
+                </div>
+
+                <h3 class="section-title" style="margin-top: 40px;">🚦 Panorama de Bienestar Organizacional</h3>
+                <p style="color: #666; margin-bottom: 20px;">Dimensiones ordenadas desde las más críticas hasta las más sólidas:</p>
+                
+                <div class="semaforo-container">
+                    ${dimensionsArray.map(dim => {
+                        let semaforoClass = '';
+                        if (dim.percentage <= 40) semaforoClass = 'semaforo-critico';
+                        else if (dim.percentage <= 65) semaforoClass = 'semaforo-riesgo';
+                        else if (dim.percentage <= 80) semaforoClass = 'semaforo-desarrollo';
+                        else semaforoClass = 'semaforo-solido';
+                        return `
+                            <div class="semaforo-item ${semaforoClass}">
+                                <div class="semaforo-label">${dim.name}</div>
+                                <div class="semaforo-score">${dim.percentage.toFixed(1)}%</div>
+                                <div style="font-weight: 600; font-size: 14px; min-width: 120px; text-align: right;">
+                                    ${dim.status}
+                                </div>
+                            </div>
+                        `;
+                    }).join('')}
+                </div>
+
+                <h3 class="section-title" style="margin-top: 40px;">📈 Análisis Detallado por Dimensión</h3>
+                ${dimensionsArray.map(dim => generarAnalisisDimension(dim, responses[dim.key])).join('')}
+
+                ${generarAnalisisDimensionCritica(dimensionsArray[0], responses[dimensionsArray[0].key])}
+
+                ${generarPlanAccion(results, dimensionsArray)}
+                ${generarMetricasImpacto(results)}
+                ${generarAlertas(results)}
+            `;
+            
+            container.innerHTML = html;
+        }
+        
+        function getResumenEjecutivo(results) {
+            const critical = results.criticalDimensions.length;
+            if (results.globalPercentage <= 35) {
+                return `Su organización presenta ${critical} dimensión(es) en estado crítico. Estudios de Gallup indican que organizaciones en este nivel experimentan hasta 40% más rotación y 30% menos productividad que el promedio del mercado. Se requiere intervención inmediata con respaldo de alta dirección.`;
+            } else if (results.globalPercentage <= 55) {
+                return `La organización está en un punto de inflexión crítico. Organizaciones que han navegado exitosamente esta transición reportan incrementos del 35-50% en engagement y reducción del 40-60% en rotación (McKinsey Health Institute).`;
+            } else if (results.globalPercentage <= 75) {
+                return `Los fundamentos están establecidos. Se requiere mayor consistencia e integración estratégica para consolidar avances. El riesgo principal es la complacencia.`;
+            } else {
+                return `Su organización se posiciona en el top 10-15% de empleadores. La investigación muestra que organizaciones con culturas maduras de bienestar tienen 25% mayor rentabilidad y 65% menor rotación (Gallup).`;
+            }
+        }
+        
+        function generarAnalisisDimension(dim, respuestas) {
+            const fortalezas = respuestas.filter(r => r === 2).length;
+            const debilidades = respuestas.filter(r => r === 0).length;
+            const statusClass = dim.status.toLowerCase().replace(/ /g, '-').replace(/ó/g, 'o');
+            return `
+                <div class="score-card">
+                    <h3 style="color: #8F579F; font-size: 20px;">${dim.name}</h3>
+                    <span class="status-badge status-${statusClass}">${dim.status}</span>
+                    <p style="margin-top: 10px; color: #666; font-size: 18px; font-weight: 600;">${dim.percentage.toFixed(1)}%</p>
+                    ${fortalezas > 0 ? `
+                        <div class="insight-box" style="margin-top: 15px;">
+                            <strong>✅ Fortalezas:</strong> ${fortalezas} de ${respuestas.length} elementos completamente implementados (${(fortalezas/respuestas.length*100).toFixed(0)}%)
+                        </div>
+                    ` : ''}
+                    ${debilidades > 0 ? `
+                        <div class="alert-box" style="margin-top: 15px;">
+                            <strong>⚠️ Oportunidades:</strong> ${debilidades} de ${respuestas.length} elementos no implementados (${(debilidades/respuestas.length*100).toFixed(0)}%)
+                        </div>
+                    ` : ''}
+                    ${getRecomendacionEstrategica(dim.key, dim.status)}
+                </div>
+            `;
+        }
+        
+        function getRecomendacionEstrategica(dimension, status) {
+            const estrategias = {
+                liderazgo: {
+                    'CRÍTICO': `<div class="recommendation"><h4>🎯 Ruta Estratégica</h4><div class="strategy-highlight"><strong>Evidencia:</strong> Según McKinsey Health Institute, organizaciones que transformaron su liderazgo incrementaron engagement en 38% y redujeron rotación en 27%.</div><p style="margin-top:15px;"><strong>Acciones Inmediatas (0-3 meses):</strong></p><ul style="margin-left:20px;margin-top:10px;"><li>Implementar evaluaciones 360° trimestrales enfocadas en comportamientos de bienestar</li><li>Crear protocolo de "check-ins de bienestar" semanales de 15 minutos entre líderes y equipos</li><li>Programa intensivo de 8 semanas en liderazgo transformacional (comprobado: reduce burnout en 31%)</li></ul></div>`,
+                    'EN RIESGO': `<div class="recommendation"><h4>🎯 Ruta Estratégica</h4><div class="strategy-highlight"><strong>Evidencia:</strong> Organizaciones que clarificaron propósito reportaron 52% mayor satisfacción (Gallup).</div><ul style="margin-left:20px;margin-top:10px;"><li>Redefinir propósito mediante talleres de co-creación con todos los niveles</li><li>Implementar "rituales de reconocimiento" semanales</li><li>Crear "contratos de liderazgo" con 3 comportamientos de bienestar específicos</li></ul></div>`
+                },
+                saludMental: {
+                    'CRÍTICO': `<div class="recommendation"><h4>🎯 Ruta Estratégica</h4><div class="alert-box danger"><strong>Urgencia:</strong> Deloitte reporta que cada dólar invertido en salud mental retorna $4 en productividad.</div><p style="margin-top:15px;"><strong>Acciones Inmediatas (0-1 mes):</strong></p><ul style="margin-left:20px;margin-top:10px;"><li>Contratar EAP con cobertura 24/7 y máximo 48 horas para primera cita</li><li>Implementar plataforma digital de apoyo psicológico (Ifeel, Calm Business, Headspace Work)</li><li>Capacitar a 100% de líderes en detección temprana de señales de alerta (4 horas)</li><li>Implementar "días de salud mental" sin justificación (probado: reduce ausentismo en 18%)</li></ul></div>`,
+                    'EN RIESGO': `<div class="recommendation"><h4>🎯 Ruta Estratégica</h4><div class="strategy-highlight"><strong>Evidencia:</strong> Programas continuos de educación en salud mental reportan 29% menos incapacidad (Integrated Benefits Institute).</div><ul style="margin-left:20px;margin-top:10px;"><li>Transformar eventos esporádicos en programa anual de 12 temas mensuales</li><li>Crear "círculos de bienestar emocional" facilitados por embajadores certificados</li><li>Implementar pulsos mensuales de clima emocional (3 preguntas, >70% respuesta)</li></ul></div>`
+                },
+                bienestarFinanciero: {
+                    'CRÍTICO': `<div class="recommendation"><h4>🎯 Ruta Estratégica</h4><div class="alert-box danger"><strong>Impacto:</strong> PwC reporta que 63% de colaboradores con estrés financiero pierden 8 horas/semana de productividad.</div><p style="margin-top:15px;"><strong>Acciones Urgentes (0-2 meses):</strong></p><ul style="margin-left:20px;margin-top:10px;"><li>Encuesta confidencial de bienestar financiero (endeudamiento, capacidad ahorro, estrés)</li><li>Auditoría externa de equidad salarial (brecha aceptable <5%)</li><li>Ajustar salarios por debajo de percentil 50 a mínimo percentil 60</li><li>Ofrecer adelanto de nómina sin interés (probado: reduce endeudamiento en 34%)</li></ul></div>`,
+                    'EN RIESGO': `<div class="recommendation"><h4>🎯 Ruta Estratégica</h4><div class="strategy-highlight"><strong>Evidencia:</strong> Programas de educación financiera reportan 23% mayor retención (Fidelity Workplace Study).</div><ul style="margin-left:20px;margin-top:10px;"><li>Programa anual con 4 módulos: presupuesto, deudas, ahorro, inversión</li><li>Asesoría financiera personalizada trimestral</li><li>Publicar rangos salariales por nivel y rol para transparencia</li></ul></div>`
+                },
+                desarrolloProfesional: {
+                    'CRÍTICO': `<div class="recommendation"><h4>🎯 Ruta Estratégica</h4><div class="alert-box danger"><strong>Dato:</strong> LinkedIn reporta que 94% de colaboradores permanecerían más si la empresa invirtiera en desarrollo. Falta de crecimiento = causa #1 de renuncia.</div><p style="margin-top:15px;"><strong>Fundamentos (0-3 meses):</strong></p><ul style="margin-left:20px;margin-top:10px;"><li>Sistema básico con conversaciones trimestrales estructuradas</li><li>Matriz de competencias por rol con criterios objetivos</li><li>Diseñar rutas de carrera en Y, T y W con requisitos claros</li><li>Presupuesto anual de desarrollo (benchmark: $1,500/persona/año)</li></ul></div>`,
+                    'EN RIESGO': `<div class="recommendation"><h4>🎯 Ruta Estratégica</h4><div class="strategy-highlight"><strong>Evidencia:</strong> Rutas claras reportan 40% mayor retención de alto desempeño (Gallup).</div><ul style="margin-left:20px;margin-top:10px;"><li>Crear arquitectura de roles con 3-5 niveles diferenciados</li><li>Institucionalizar feedback 360°, feedforward y reconocimiento peer-to-peer</li><li>Programa diferenciado para talentos con rotaciones estratégicas</li></ul></div>`
+                },
+                energiaVital: {
+                    'CRÍTICO': `<div class="recommendation"><h4>🎯 Ruta Estratégica</h4><div class="alert-box danger"><strong>Urgencia:</strong> CDC reporta que 6 enfermedades crónicas cuestan $36,000/colaborador/año en productividad perdida.</div><p style="margin-top:15px;"><strong>Sistema (0-2 meses):</strong></p><ul style="margin-left:20px;margin-top:10px;"><li>Integrar exámenes ocupacionales, morbilidad y factores de riesgo en dashboard único</li><li>Identificar colaboradores en riesgo alto para intervención prioritaria</li><li>Programa de activación física: clases grupales, retos, membresías gym</li><li>Política de comida saludable: 80% opciones nutritivas en comedores</li></ul></div>`,
+                    'EN RIESGO': `<div class="recommendation"><h4>🎯 Ruta Estratégica</h4><div class="strategy-highlight"><strong>Evidencia:</strong> Programas integrales reducen ausentismo en 28% y costos médicos en 26% (HBR).</div><ul style="margin-left:20px;margin-top:10px;"><li>Programa holístico: ejercicio + nutrición + prevención</li><li>Retos trimestrales de actividad física con incentivos</li><li>Screening anuales preventivos (presión, glucosa, colesterol, IMC)</li></ul></div>`
+                },
+                sostenibilidad: {
+                    'CRÍTICO': `<div class="recommendation"><h4>🎯 Ruta Estratégica</h4><div class="alert-box danger"><strong>Criticidad:</strong> Sin estrategia con gobernanza y recursos, cualquier mejora será temporal.</div><p style="margin-top:15px;"><strong>Gobernanza (0-2 meses):</strong></p><ul style="margin-left:20px;margin-top:10px;"><li>Elevar bienestar a prioridad de Junta Directiva con presentaciones trimestrales</li><li>Asignar presupuesto específico (benchmark: 2-4% de nómina total)</li><li>Crear rol de Chief Wellbeing Officer o Gerente de Bienestar</li><li>Políticas de cero tolerancia a discriminación con protocolo de denuncia seguro</li></ul></div>`,
+                    'EN RIESGO': `<div class="recommendation"><h4>🎯 Ruta Estratégica</h4><div class="strategy-highlight"><strong>Evidencia:</strong> Estrategia formal reporta 3x mayor ROI (Deloitte).</div><ul style="margin-left:20px;margin-top:10px;"><li>Formalizar estrategia con visión 3 años, objetivos, KPIs y roadmap</li><li>Difundir código de principios entre colaboradores, clientes, proveedores</li><li>Programa 3R con metas cuantificables anuales</li></ul></div>`
+                }
+            };
+            return estrategias[dimension]?.[status] || '<div class="recommendation"><p>Mantener y optimizar prácticas actuales.</p></div>';
+        }
+        
+        function generarPlanAccion(results, dimensionsArray) {
+            const criticos = dimensionsArray.filter(d => d.percentage <= 40);
+            const riesgo = dimensionsArray.filter(d => d.percentage > 40 && d.percentage <= 65);
+            let html = '<h3 class="section-title" style="margin-top:40px;">📋 Plan de Acción en 3 Fases</h3>';
+            
+            if (criticos.length > 0) {
+                html += `<div class="phase-box" style="border-color:#f44336;"><h4 style="color:#f44336;">FASE 1 (0-6 MESES): ESTABILIZACIÓN</h4><p><strong>Objetivo:</strong> Reducir riesgos inmediatos</p><p><strong>Dimensiones:</strong> ${criticos.map(d=>d.name).join(', ')}</p><ul style="margin-left:20px;margin-top:10px;"><li>Intervención inmediata en ${criticos.length} dimensión(es) crítica(s)</li><li>Asignación de presupuesto de emergencia</li><li>Evaluación mensual de indicadores</li></ul><p style="margin-top:15px;"><strong>Inversión:</strong> $${(criticos.length*15000).toLocaleString()} USD</p></div>`;
+            }
+            if (riesgo.length > 0) {
+                html += `<div class="phase-box" style="border-color:#ff9800;"><h4 style="color:#ff9800;">FASE 2 (6-18 MESES): FORTALECIMIENTO</h4><p><strong>Objetivo:</strong> Construir procesos sostenibles</p><p><strong>Dimensiones:</strong> ${riesgo.map(d=>d.name).join(', ')}</p><ul style="margin-left:20px;margin-top:10px;"><li>Desarrollo con programas estructurados</li><li>Consolidación de mejoras de Fase 1</li><li>Evaluación trimestral</li></ul></div>`;
+            }
+            html += `<div class="phase-box"><h4>FASE 3 (18-36 MESES): OPTIMIZACIÓN</h4><p><strong>Objetivo:</strong> Innovación y posicionamiento referente</p><ul style="margin-left:20px;margin-top:10px;"><li>Mejora continua de todas las dimensiones</li><li>Certificaciones internacionales</li><li>Benchmarking sectorial</li></ul></div>`;
+            return html;
+        }
+        
+        function generarMetricasImpacto(results) {
+            const turnoverReduction = results.criticalDimensions.length >= 2 ? 35 : 20;
+            const productivityGain = results.criticalDimensions.length >= 2 ? 25 : 15;
+            const investment = results.criticalDimensions.length * 15000 + results.riskDimensions.length * 8000;
+            const benefit = 100000 * (turnoverReduction/100) + 80000 * (productivityGain/100);
+            const roi = ((benefit - investment) / investment * 100).toFixed(0);
+            
+            return `
+                <h3 class="section-title" style="margin-top:40px;">📊 Métricas de Impacto Proyectado</h3>
+                <div class="metric-grid">
+                    <div class="metric-card">
+                        <div class="metric-label">Puntuación Actual</div>
+                        <div class="metric-value">${results.globalPercentage.toFixed(1)}%</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Meta 18 Meses</div>
+                        <div class="metric-value" style="color:#47c0ef;">${(results.globalPercentage + 20).toFixed(1)}%</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">ROI Estimado</div>
+                        <div class="metric-value" style="color:#44cc44;">${roi}%</div>
+                    </div>
+                </div>
+                <div class="insight-box">
+                    <strong>💰 Beneficios Proyectados (18 meses):</strong>
+                    <ul style="margin-left:20px;margin-top:10px;">
+                        <li>Reducción de rotación: ${turnoverReduction}%</li>
+                        <li>Mejora en productividad: ${productivityGain}%</li>
+                        <li>Reducción de ausentismo: 30%</li>
+                        <li>Mejora en engagement: 40%</li>
+                    </ul>
+                </div>
+            `;
+        }
+        
+        function generarAlertas(results) {
+            const alertas = [];
+            if (results.criticalDimensions.includes('liderazgo') && results.criticalDimensions.includes('saludMental')) {
+                alertas.push('<div class="alert-box danger"><h4>⚠️ ALERTA CRÍTICA: Liderazgo + Salud Mental</h4><p>Riesgo de exodus masivo de talento. Requiere intervención dual inmediata.</p></div>');
+            }
+            if (results.criticalDimensions.includes('bienestarFinanciero') && results.criticalDimensions.includes('desarrolloProfesional')) {
+                alertas.push('<div class="alert-box danger"><h4>⚠️ ALERTA CRÍTICA: Bienestar Financiero + Desarrollo</h4><p>Sin perspectiva económica ni profesional. Predictor #1 de rotación según LinkedIn.</p></div>');
+            }
+            if (results.criticalDimensions.includes('sostenibilidad')) {
+                alertas.push('<div class="alert-box danger"><h4>⚠️ ALERTA ESTRUCTURAL: Sostenibilidad Comprometida</h4><p>Sin estrategia y recursos, cualquier mejora será temporal.</p></div>');
+            }
+            if (alertas.length === 0) return '';
+            return '<h3 class="section-title" style="margin-top:40px;">🚨 Alertas Críticas</h3>' + alertas.join('');
+        }
+        
+        function generarAnalisisDimensionCritica(dimension, respuestas) {
+            const detalleCritico = {
+                liderazgo: {
+                    titulo: 'Liderazgo y Propósito: Base de la Transformación Cultural',
+                    impacto: 'El liderazgo es el multiplicador de cualquier iniciativa de bienestar. Sin líderes comprometidos y capacitados, ningún programa tendrá éxito sostenible. Esta dimensión impacta directamente en seguridad psicológica, engagement, retención de talento y cultura organizacional.',
+                    costoInaccion: 'Organizaciones con liderazgo deficiente experimentan 3x más rotación de talento, 2x más ausentismo y 50% menos productividad. El costo promedio de reemplazar un líder es 200% de su salario anual.',
+                    rutaDetallada: `
+                        <div style="background: white; padding: 20px; border-radius: 10px; margin: 15px 0;">
+                            <h4 style="color: #8F579F; margin-bottom: 15px;">📍 RUTA DE TRANSFORMACIÓN DETALLADA</h4>
+                            
+                            <div style="background: #ffebee; padding: 15px; border-radius: 8px; margin: 10px 0; border-left: 4px solid #f44336;">
+                                <strong style="color: #d32f2f;">SEMANAS 1-4: DIAGNÓSTICO Y COMPROMISO</strong>
+                                <ul style="margin-left: 20px; margin-top: 10px;">
+                                    <li>Realizar evaluación 360° a todos los líderes enfocada en comportamientos de bienestar (no solo resultados)</li>
+                                    <li>Sesión de sensibilización con alta dirección: presentar resultados del assessment y costo de inacción</li>
+                                    <li>Cada líder crea su "Compromiso Personal de Bienestar" con 3 comportamientos específicos</li>
+                                    <li>Comunicar transparentemente a toda la organización el inicio del programa de transformación</li>
+                                </ul>
+                            </div>
+                            
+                            <div style="background: #fff3e0; padding: 15px; border-radius: 8px; margin: 10px 0; border-left: 4px solid #ff9800;">
+                                <strong style="color: #f57c00;">SEMANAS 5-12: DESARROLLO INTENSIVO</strong>
+                                <ul style="margin-left: 20px; margin-top: 10px;">
+                                    <li>Programa de 8 semanas en Liderazgo Transformacional (2 horas/semana, presencial + virtual)</li>
+                                    <li>Temas: seguridad psicológica, inteligencia emocional, comunicación empática, gestión del cambio</li>
+                                    <li>Coaching ejecutivo 1:1 para el 20% de líderes con mayor impacto en clima (6 sesiones/persona)</li>
+                                    <li>Implementar "check-ins de bienestar" semanales de 15 minutos (formato estructurado)</li>
+                                    <li>Crear "Consejo de Bienestar" con representación de todos los niveles</li>
+                                </ul>
+                            </div>
+                            
+                            <div style="background: #e3f2fd; padding: 15px; border-radius: 8px; margin: 10px 0; border-left: 4px solid #2196f3;">
+                                <strong style="color: #1976d2;">MESES 4-6: INSTITUCIONALIZACIÓN</strong>
+                                <ul style="margin-left: 20px; margin-top: 10px;">
+                                    <li>Integrar competencias de liderazgo consciente en evaluación de desempeño (peso mínimo 30%)</li>
+                                    <li>Crear sistema de reconocimiento para líderes que modelen comportamientos deseados</li>
+                                    <li>Redefinir o reforzar propósito organizacional mediante talleres de co-creación</li>
+                                    <li>Implementar encuesta mensual de pulso de confianza en liderazgo (3 preguntas, 2 minutos)</li>
+                                    <li>Primera medición de impacto: comparar indicadores vs. baseline inicial</li>
+                                </ul>
+                            </div>
+                            
+                            <p style="margin-top: 20px; padding: 15px; background: #f3e6f7; border-radius: 8px;">
+                                <strong style="color: #8F579F;">🎯 Meta de 6 meses:</strong> Incremento del 25% en índice de confianza hacia liderazgo y reducción del 15% en rotación voluntaria de equipos con líderes del programa.
+                            </p>
+                        </div>
+                    `
+                },
+                saludMental: {
+                    titulo: 'Salud Mental: El Activo Invisible Más Valioso',
+                    impacto: 'La salud mental es el fundamento de la productividad, creatividad, colaboración y resiliencia organizacional. Una persona con mala salud mental pierde en promedio 8 días productivos al mes por "presentismo" (estar físicamente pero mentalmente ausente).',
+                    costoInaccion: 'La OMS estima que depresión y ansiedad cuestan a la economía global $1 trillón anuales en productividad perdida. A nivel organizacional: incremento del 40% en ausentismo, 35% en rotación y 50% en accidentes laborales.',
+                    rutaDetallada: `
+                        <div style="background: white; padding: 20px; border-radius: 10px; margin: 15px 0;">
+                            <h4 style="color: #8F579F; margin-bottom: 15px;">📍 RUTA DE TRANSFORMACIÓN DETALLADA</h4>
+                            
+                            <div style="background: #ffebee; padding: 15px; border-radius: 8px; margin: 10px 0; border-left: 4px solid #f44336;">
+                                <strong style="color: #d32f2f;">SEMANA 1-2: RESPUESTA DE EMERGENCIA</strong>
+                                <ul style="margin-left: 20px; margin-top: 10px;">
+                                    <li>Contratar EAP (Employee Assistance Program) con cobertura 24/7 - proveedores: iFeel, BetterHelp for Work, Modern Health</li>
+                                    <li>Garantizar primera cita psicológica en máximo 48 horas</li>
+                                    <li>Comunicar recursos disponibles mediante múltiples canales (email, carteles, reuniones, intranet)</li>
+                                    <li>Implementar línea de crisis 24/7 con psicólogos certificados</li>
+                                    <li>Crear protocolo de actuación para líderes ante señales de alerta (suicidio, crisis, etc.)</li>
+                                </ul>
+                            </div>
+                            
+                            <div style="background: #fff3e0; padding: 15px; border-radius: 8px; margin: 10px 0; border-left: 4px solid #ff9800;">
+                                <strong style="color: #f57c00;">SEMANAS 3-8: EDUCACIÓN Y SENSIBILIZACIÓN</strong>
+                                <ul style="margin-left: 20px; margin-top: 10px;">
+                                    <li>Capacitar al 100% de líderes en detección temprana de señales de alerta (programa de 4 horas)</li>
+                                    <li>Webinar mensual sobre temas específicos: ansiedad, depresión, burnout, duelo, estrés postraumático</li>
+                                    <li>Certificar al 5% de la plantilla en Primeros Auxilios Psicológicos (MHFA International - 8 horas)</li>
+                                    <li>Crear "espacios de conversación seguros" mensuales facilitados por psicólogos clínicos</li>
+                                    <li>Implementar plataforma digital de salud mental: meditación, terapia chat, recursos educativos</li>
+                                </ul>
+                            </div>
+                            
+                            <div style="background: #e3f2fd; padding: 15px; border-radius: 8px; margin: 10px 0; border-left: 4px solid #2196f3;">
+                                <strong style="color: #1976d2;">MESES 3-6: CULTURA Y SOSTENIBILIDAD</strong>
+                                <ul style="margin-left: 20px; margin-top: 10px;">
+                                    <li>Implementar "días de salud mental" sin justificación médica (2 al año, renovables)</li>
+                                    <li>Política de "derecho a desconexión": no correos/mensajes fuera de horario laboral</li>
+                                    <li>Crear red de "embajadores de bienestar mental" (empleados certificados que dan soporte peer-to-peer)</li>
+                                    <li>Pulsos mensuales anónimos de clima emocional (3 preguntas, 2 minutos, tasa >70%)</li>
+                                    <li>Integrar indicadores de salud mental en dashboard de RRHH con revisión mensual</li>
+                                    <li>Testimonios de colaboradores que usaron recursos (con permiso) para reducir estigma</li>
+                                </ul>
+                            </div>
+                            
+                            <p style="margin-top: 20px; padding: 15px; background: #f3e6f7; border-radius: 8px;">
+                                <strong style="color: #8F579F;">🎯 Meta de 6 meses:</strong> 40% de uso de recursos de apoyo, reducción del 25% en ausentismo por causas de salud mental, incremento del 35% en percepción de que "la empresa se preocupa por mi bienestar".
+                            </p>
+                        </div>
+                    `
+                },
+                bienestarFinanciero: {
+                    titulo: 'Bienestar Financiero: El Elefante en la Habitación',
+                    impacto: 'El estrés financiero es el distractor cognitivo #1 en el trabajo. Una persona con problemas financieros pierde hasta 8 horas semanales de productividad pensando en dinero. Además, es el predictor más fuerte de rotación voluntaria - especialmente en talento joven.',
+                    costoInaccion: 'PwC reporta que empleados con estrés financiero alto tienen 2x más probabilidad de buscar nuevo empleo, 5x más probabilidad de distraerse en el trabajo y 4x más probabilidad de tener problemas de salud. Costo organizacional: pérdida de productividad del 12-15% anual.',
+                    rutaDetallada: `
+                        <div style="background: white; padding: 20px; border-radius: 10px; margin: 15px 0;">
+                            <h4 style="color: #8F579F; margin-bottom: 15px;">📍 RUTA DE TRANSFORMACIÓN DETALLADA</h4>
+                            
+                            <div style="background: #ffebee; padding: 15px; border-radius: 8px; margin: 10px 0; border-left: 4px solid #f44336;">
+                                <strong style="color: #d32f2f;">SEMANAS 1-4: DIAGNÓSTICO PROFUNDO</strong>
+                                <ul style="margin-left: 20px; margin-top: 10px;">
+                                    <li>Encuesta confidencial de bienestar financiero (herramienta: Financial Health Network Assessment)</li>
+                                    <li>Medir: nivel de endeudamiento, capacidad de ahorro, estrés financiero, alfabetización financiera</li>
+                                    <li>Auditoría externa de equidad salarial por género, antigüedad, rol (brecha aceptable <3%)</li>
+                                    <li>Benchmarking salarial con 5 competidores principales del sector (fuente: glassdoor, payscale, asociaciones)</li>
+                                    <li>Identificar colaboradores en riesgo financiero alto para intervención prioritaria</li>
+                                </ul>
+                            </div>
+                            
+                            <div style="background: #fff3e0; padding: 15px; border-radius: 8px; margin: 10px 0; border-left: 4px solid #ff9800;">
+                                <strong style="color: #f57c00;">SEMANAS 5-12: CORRECCIÓN ESTRUCTURAL</strong>
+                                <ul style="margin-left: 20px; margin-top: 10px;">
+                                    <li>Ajustar salarios por debajo de percentil 50 del mercado a mínimo percentil 60 (inversión crítica)</li>
+                                    <li>Publicar rangos salariales por nivel y rol para garantizar transparencia total</li>
+                                    <li>Ofrecer adelanto de nómina sin interés hasta 50% (reduce préstamos usureros en 34%)</li>
+                                    <li>Programa intensivo de educación financiera: 4 talleres mensuales (presupuesto, deudas, ahorro, inversión)</li>
+                                    <li>Asesoría financiera personalizada para colaboradores en riesgo alto (1 hora/persona/mes)</li>
+                                    <li>Eliminar beneficios que generan endeudamiento, priorizar beneficios educativos</li>
+                                </ul>
+                            </div>
+                            
+                            <div style="background: #e3f2fd; padding: 15px; border-radius: 8px; margin: 10px 0; border-left: 4px solid #2196f3;">
+                                <strong style="color: #1976d2;">MESES 4-6: CONSTRUCCIÓN DE FUTURO</strong>
+                                <ul style="margin-left: 20px; margin-top: 10px;">
+                                    <li>Crear fondo de ahorro voluntario con match empresarial (empresa aporta 50% hasta cierto tope)</li>
+                                    <li>Implementar fondo de emergencia colectivo para casos críticos (enfermedad, accidente, fallecimiento)</li>
+                                    <li>Ofrecer productos financieros ventajosos: fondo de retiro, inversión, seguros</li>
+                                    <li>Programa de planificación financiera de largo plazo (jubilación, educación hijos, vivienda)</li>
+                                    <li>App de gestión financiera personalizada con gamificación y metas individuales</li>
+                                    <li>Medición de impacto: correlacionar bienestar financiero con engagement y productividad</li>
+                                </ul>
+                            </div>
+                            
+                            <p style="margin-top: 20px; padding: 15px; background: #f3e6f7; border-radius: 8px;">
+                                <strong style="color: #8F579F;">🎯 Meta de 6 meses:</strong> Reducir en 40% el porcentaje de colaboradores con estrés financiero alto, incrementar capacidad de ahorro en 25%, reducir rotación en 20%.
+                            </p>
+                        </div>
+                    `
+                },
+                desarrolloProfesional: {
+                    titulo: 'Desarrollo Profesional: El Contrato Psicológico del Siglo XXI',
+                    impacto: 'La percepción de estancamiento profesional es la causa #1 de rotación voluntaria en talento calificado. Los colaboradores de hoy no buscan solo un empleo, buscan una plataforma de crecimiento. Sin desarrollo visible, la empresa se convierte en un "trampolín" temporal.',
+                    costoInaccion: 'LinkedIn Workforce Report: organizaciones sin programas claros de desarrollo experimentan 3x más rotación de alto desempeño. El costo de perder un colaborador de alto potencial es 200-300% de su salario anual. Además, la reputación como empleador se deteriora rápidamente.',
+                    rutaDetallada: `
+                        <div style="background: white; padding: 20px; border-radius: 10px; margin: 15px 0;">
+                            <h4 style="color: #8F579F; margin-bottom: 15px;">📍 RUTA DE TRANSFORMACIÓN DETALLADA</h4>
+                            
+                            <div style="background: #ffebee; padding: 15px; border-radius: 8px; margin: 10px 0; border-left: 4px solid #f44336;">
+                                <strong style="color: #d32f2f;">SEMANAS 1-6: FUNDAMENTOS Y CLARIDAD</strong>
+                                <ul style="margin-left: 20px; margin-top: 10px;">
+                                    <li>Definir matriz de competencias por familia de roles (técnicas, liderazgo, negocio)</li>
+                                    <li>Crear arquitectura de roles con 3-5 niveles claramente diferenciados</li>
+                                    <li>Documentar criterios objetivos de progresión para cada nivel (skills, experiencia, impacto)</li>
+                                    <li>Implementar sistema básico de gestión de desempeño con conversaciones trimestrales estructuradas</li>
+                                    <li>Capacitar a líderes en cómo dar feedback constructivo y feedforward efectivo (4 horas)</li>
+                                    <li>Comunicar transparentemente rutas de carrera disponibles en portal interno</li>
+                                </ul>
+                            </div>
+                            
+                            <div style="background: #fff3e0; padding: 15px; border-radius: 8px; margin: 10px 0; border-left: 4px solid #ff9800;">
+                                <strong style="color: #f57c00;">SEMANAS 7-16: DISEÑO DE FUTURO</strong>
+                                <ul style="margin-left: 20px; margin-top: 10px;">
+                                    <li>Diseñar rutas de carrera en Y (gerencial), T (especialización amplia) y W (doble especialización)</li>
+                                    <li>Crear planes de desarrollo personalizados para 100% de colaboradores (revisión trimestral)</li>
+                                    <li>Asignar presupuesto anual de desarrollo por persona (benchmark: $1,500-$2,000/año)</li>
+                                    <li>Identificar top 15% de talento de alto potencial para programa diferenciado</li>
+                                    <li>Implementar planes de sucesión para top 20 posiciones críticas</li>
+                                    <li>Política de promoción interna first: 70% de vacantes abiertas internamente primero</li>
+                                    <li>Sistema de feedback 360° semestral + reconocimiento peer-to-peer mensual</li>
+                                </ul>
+                            </div>
+                            
+                            <div style="background: #e3f2fd; padding: 15px; border-radius: 8px; margin: 10px 0; border-left: 4px solid #2196f3;">
+                                <strong style="color: #1976d2;">MESES 5-6: ACELERACIÓN Y ESCALA</strong>
+                                <ul style="margin-left: 20px; margin-top: 10px;">
+                                    <li>Lanzar Universidad Corporativa con programas por familia de roles y niveles</li>
+                                    <li>Implementar programa de rotaciones temporales entre áreas (3-6 meses)</li>
+                                    <li>Crear sistema de gestión del conocimiento para capturar aprendizajes críticos</li>
+                                    <li>Programa de mentoría formal: cada high potential tiene 1 mentor senior</li>
+                                    <li>Convenios con universidades para diplomados/maestrías con subsidio empresarial</li>
+                                    <li>Medición rigurosa: % de promociones internas, índice de desarrollo percibido, retención de talento</li>
+                                </ul>
+                            </div>
+                            
+                            <p style="margin-top: 20px; padding: 15px; background: #f3e6f7; border-radius: 8px;">
+                                <strong style="color: #8F579F;">🎯 Meta de 6 meses:</strong> 80% de colaboradores con plan de desarrollo documentado, 60% de vacantes cubiertas internamente, reducción del 30% en rotación de alto potencial.
+                            </p>
+                        </div>
+                    `
+                },
+                energiaVital: {
+                    titulo: 'Energía Vital: El Combustible del Alto Desempeño',
+                    impacto: 'La energía física y mental son recursos limitados y renovables. Organizaciones que descuidan la salud física de sus colaboradores pagan el precio en forma de enfermedades crónicas, ausentismo prolongado, costos médicos crecientes y años de vida productiva perdidos.',
+                    costoInaccion: 'CDC reporta que 6 enfermedades crónicas (diabetes, hipertensión, obesidad, enfermedades cardíacas, depresión, artritis) cuestan a empleadores $36,000 por colaborador afectado al año. El 86% de costos de salud empresariales son por enfermedades prevenibles.',
+                    rutaDetallada: `
+                        <div style="background: white; padding: 20px; border-radius: 10px; margin: 15px 0;">
+                            <h4 style="color: #8F579F; margin-bottom: 15px;">📍 RUTA DE TRANSFORMACIÓN DETALLADA</h4>
+                            
+                            <div style="background: #ffebee; padding: 15px; border-radius: 8px; margin: 10px 0; border-left: 4px solid #f44336;">
+                                <strong style="color: #d32f2f;">SEMANAS 1-4: SISTEMA DE VIGILANCIA</strong>
+                                <ul style="margin-left: 20px; margin-top: 10px;">
+                                    <li>Integrar resultados de exámenes ocupacionales en dashboard único de salud organizacional</li>
+                                    <li>Cruzar datos de morbilidad (incapacidades) con factores de riesgo identificados</li>
+                                    <li>Identificar colaboradores con 2+ factores de riesgo metabólico para intervención prioritaria</li>
+                                    <li>Crear perfil de riesgo individual: bajo, medio, alto (confidencial, solo para médico ocupacional)</li>
+                                    <li>Implementar plataforma de seguimiento de metas de salud personalizadas con gamificación</li>
+                                </ul>
+                            </div>
+                            
+                            <div style="background: #fff3e0; padding: 15px; border-radius: 8px; margin: 10px 0; border-left: 4px solid #ff9800;">
+                                <strong style="color: #f57c00;">SEMANAS 5-12: ACTIVACIÓN Y EDUCACIÓN</strong>
+                                <ul style="margin-left: 20px; margin-top: 10px;">
+                                    <li>Programa de activación física más allá de pausas: clases grupales 3x/semana (yoga, zumba, funcional)</li>
+                                    <li>Subsidio del 50% en membresías de gimnasios o apps de fitness (Fitbit, Apple Fitness+)</li>
+                                    <li>Retos trimestrales con incentivos tangibles: "10,000 pasos", "30 días sin azúcar", "Kilómetros corporativos"</li>
+                                    <li>Asesoría nutricional individualizada para colaboradores con diagnóstico (diabetes, hipertensión, obesidad)</li>
+                                    <li>Educación mensual sobre prevención: webinars de 45 minutos con especialistas certificados</li>
+                                    <li>Política de alimentación saludable: 80% de opciones nutritivas en comedores y máquinas expendedoras</li>
+                                </ul>
+                            </div>
+                            
+                            <div style="background: #e3f2fd; padding: 15px; border-radius: 8px; margin: 10px 0; border-left: 4px solid #2196f3;">
+                                <strong style="color: #1976d2;">MESES 4-6: MEDICINA PREVENTIVA</strong>
+                                <ul style="margin-left: 20px; margin-top: 10px;">
+                                    <li>Screening anuales de salud preventiva: presión arterial, glucosa, colesterol, IMC, grasa visceral</li>
+                                    <li>Vacunación anual contra influenza en instalaciones de la empresa (cobertura >80%)</li>
+                                    <li>Programa de monitoreo de calidad de sueño con recomendaciones personalizadas (uso de wearables)</li>
+                                    <li>Consultas de medicina preventiva semestrales con médico ocupacional</li>
+                                    <li>Programa de cesación de tabaquismo con acompañamiento psicológico (6 meses)</li>
+                                    <li>Medición de impacto: reducción de factores de riesgo, ausentismo, costos médicos, productividad</li>
+                                </ul>
+                            </div>
+                            
+                            <p style="margin-top: 20px; padding: 15px; background: #f3e6f7; border-radius: 8px;">
+                                <strong style="color: #8F579F;">🎯 Meta de 6 meses:</strong> Reducir en 25% el porcentaje de colaboradores con 2+ factores de riesgo metabólico, disminuir ausentismo en 20%, incrementar participación en programas de bienestar físico al 60%.
+                            </p>
+                        </div>
+                    `
+                },
+                sostenibilidad: {
+                    titulo: 'Sostenibilidad: El Sistema Nervioso del Bienestar',
+                    impacto: 'Sin una estrategia formal de bienestar con gobernanza, presupuesto y equipo dedicado, todo lo demás son parches temporales. Esta dimensión determina si las mejoras serán sostenibles o desaparecerán con el próximo cambio de prioridades. Es la diferencia entre transformación real y teatro corporativo.',
+                    costoInaccion: 'Deloitte Human Capital Trends reporta que organizaciones sin estrategia formal de bienestar tienen 70% de probabilidad de abandono de programas en 18 meses. El dinero invertido se desperdicia, la credibilidad se pierde, y los colaboradores se vuelven cínicos ante nuevas iniciativas.',
+                    rutaDetallada: `
+                        <div style="background: white; padding: 20px; border-radius: 10px; margin: 15px 0;">
+                            <h4 style="color: #8F579F; margin-bottom: 15px;">📍 RUTA DE TRANSFORMACIÓN DETALLADA</h4>
+                            
+                            <div style="background: #ffebee; padding: 15px; border-radius: 8px; margin: 10px 0; border-left: 4px solid #f44336;">
+                                <strong style="color: #d32f2f;">SEMANAS 1-4: GOBERNANZA Y ESTRUCTURA</strong>
+                                <ul style="margin-left: 20px; margin-top: 10px;">
+                                    <li>Presentar resultados del assessment a Junta Directiva/Comité Ejecutivo con análisis de ROI</li>
+                                    <li>Obtener compromiso visible de CEO/alta dirección: comunicado oficial sobre prioridad de bienestar</li>
+                                    <li>Crear rol de Chief Wellbeing Officer o Gerente de Bienestar con reporte directo a CEO/CHRO</li>
+                                    <li>Asignar presupuesto específico de bienestar (benchmark: 2-4% de nómina total anual)</li>
+                                    <li>Conformar equipo dedicado: 1 persona por cada 250 colaboradores (mínimo)</li>
+                                    <li>Crear Comité de Bienestar con representación cross-funcional y de todos los niveles</li>
+                                </ul>
+                            </div>
+                            
+                            <div style="background: #fff3e0; padding: 15px; border-radius: 8px; margin: 10px 0; border-left: 4px solid #ff9800;">
+                                <strong style="color: #f57c00;">SEMANAS 5-12: ESTRATEGIA Y POLÍTICAS</strong>
+                                <ul style="margin-left: 20px; margin-top: 10px;">
+                                    <li>Desarrollar estrategia de bienestar 2025-2028: visión, objetivos, KPIs, roadmap, presupuesto</li>
+                                    <li>Alinear estrategia de bienestar con estrategia de negocio (bienestar no es CSR, es core business)</li>
+                                    <li>Crear o actualizar políticas críticas: anti-discriminación, anti-acoso, equidad de género, inclusión</li>
+                                    <li>Implementar protocolo de denuncia seguro y confidencial con investigación externa</li>
+                                    <li>Establecer meta de equidad de género: representación 40-60% en todos los niveles para 2027</li>
+                                    <li>Auditoría de equidad salarial de género con corrección de brechas >3%</li>
+                                    <li>Crear y difundir código de ética/principios de negocio entre stakeholders</li>
+                                </ul>
+                            </div>
+                            
+                            <div style="background: #e3f2fd; padding: 15px; border-radius: 8px; margin: 10px 0; border-left: 4px solid #2196f3;">
+                                <strong style="color: #1976d2;">MESES 4-6: CULTURA Y COMPROMISO</strong>
+                                <ul style="margin-left: 20px; margin-top: 10px;">
+                                    <li>Implementar programa 3R (reducir, reutilizar, reciclar) con metas cuantificables anuales</li>
+                                    <li>Eliminar plásticos de un solo uso en todas las instalaciones</li>
+                                    <li>Programa de voluntariado corporativo con causa de largo plazo (no eventos aislados para foto)</li>
+                                    <li>Medir huella de carbono organizacional y comprometerse a neutralidad para 2030</li>
+                                    <li>Integrar criterios ESG en evaluación de proveedores y socios de negocio</li>
+                                    <li>Dashboard de bienestar en tiempo real visible para Junta Directiva con revisión trimestral</li>
+                                    <li>Comunicación permanente de avances, historias de éxito y aprendizajes</li>
+                                </ul>
+                            </div>
+                            
+                            <p style="margin-top: 20px; padding: 15px; background: #f3e6f7; border-radius: 8px;">
+                                <strong style="color: #8F579F;">🎯 Meta de 6 meses:</strong> Estrategia de bienestar aprobada y en ejecución, presupuesto asignado, equipo conformado, políticas actualizadas, indicadores en dashboard, percepción de que "el bienestar es prioridad real" en >70% de colaboradores.
+                            </p>
+                        </div>
+                    `
+                }
+            };
+            
+            const info = detalleCritico[dimension.key];
+            if (!info) return '';
+            
+            return `
+                <div style="background: linear-gradient(135deg, #8F579F 0%, #47c0ef 100%); padding: 30px; border-radius: 15px; margin: 30px 0; color: white;">
+                    <h3 style="font-size: 24px; margin-bottom: 10px;">🎯 ANÁLISIS PROFUNDO: DIMENSIÓN MÁS CRÍTICA</h3>
+                    <p style="font-size: 18px; opacity: 0.95;">${dimension.name} - ${dimension.percentage.toFixed(1)}%</p>
+                </div>
+                
+                <div style="background: white; border: 3px solid #8F579F; border-radius: 15px; padding: 30px; margin: 20px 0;">
+                    <h3 style="color: #8F579F; font-size: 22px; margin-bottom: 20px;">${info.titulo}</h3>
+                    
+                    <div style="background: #e8f4f8; padding: 20px; border-radius: 10px; margin: 15px 0; border-left: 4px solid #0288d1;">
+                        <strong style="color: #0288d1; font-size: 16px;">💡 Por qué es crítico:</strong>
+                        <p style="margin-top: 10px; line-height: 1.8;">${info.impacto}</p>
+                    </div>
+                    
+                    <div style="background: #ffebee; padding: 20px; border-radius: 10px; margin: 15px 0; border-left: 4px solid #f44336;">
+                        <strong style="color: #d32f2f; font-size: 16px;">⚠️ Costo de no actuar:</strong>
+                        <p style="margin-top: 10px; line-height: 1.8;">${info.costoInaccion}</p>
+                    </div>
+                    
+                    ${info.rutaDetallada}
+                    
+                    <div style="background: #f3e6f7; padding: 20px; border-radius: 10px; margin-top: 20px; text-align: center;">
+                        <p style="font-size: 18px; color: #8F579F; font-weight: 600;">
+                            Esta dimensión debe ser tu PRIORIDAD #1 en los próximos 6 meses
+                        </p>
+                    </div>
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>
