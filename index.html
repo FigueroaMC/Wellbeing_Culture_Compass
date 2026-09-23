@@ -294,7 +294,7 @@
             <div class="form-group">
                 <label style="display:flex; gap:10px; align-items:flex-start; font-weight:400; cursor:pointer;">
                     <input type="checkbox" id="consentimiento" style="width:20px; height:20px; margin-top:3px; flex-shrink:0; accent-color:#8F579F;">
-                    <span>Acepto que Paradigma B use estos datos y mis respuestas para enviarme el resultado y contactarme. *</span>
+                    <span>Acepto que Paradigma B use mis datos y mis respuestas para mostrarme mis resultados al final de esta evaluación, y para sumarme al ecosistema Paradigma B. *</span>
                 </label>
             </div>
 
@@ -318,7 +318,8 @@
         <div id="resultsSection" class="content hidden">
             <h2 class="section-title">Reporte de Resultados</h2>
             <div id="resultsContent"></div>
-            <div style="margin-top: 30px; display: flex; gap: 15px; flex-wrap: wrap;">
+            <p style="margin-top: 30px; line-height: 1.8; color: #333;">Si necesitas del acompañamiento de nuestro equipo para cerrar las brechas y atender las dimensiones críticas que encontraste en este diagnóstico, agendemos una videollamada y exploremos juntos el plan de acción.</p>
+            <div style="margin-top: 15px; display: flex; gap: 15px; flex-wrap: wrap;">
                 <button class="btn" onclick="location.reload()">Nueva Evaluación</button>
                 <button class="btn" onclick="window.open(CAL_URL, '_blank', 'noopener')" style="background: linear-gradient(135deg, #47c0ef 0%, #8F579F 100%);">
                     📅 Agendar Reunión con Nuestro Equipo
@@ -704,13 +705,13 @@
         function getResumenEjecutivo(results) {
             const critical = results.criticalDimensions.length;
             if (results.globalPercentage <= 35) {
-                return `Su organización presenta ${critical} dimensión(es) en estado crítico. Estudios de Gallup indican que organizaciones en este nivel experimentan hasta 40% más rotación y 30% menos productividad que el promedio del mercado. Se requiere intervención inmediata con respaldo de alta dirección.`;
+                return `Tu organización tiene ${critical} dimensión(es) en estado crítico, y esto no se resuelve con un programa aislado. El McKinsey Health Institute encuestó a más de 30.000 personas en 30 países y encontró que la cultura de equipo —no los beneficios, no las pausas activas— es lo que más pesa en la seguridad psicológica de un equipo. Solo 43% dice tener hoy una cultura de equipo positiva. Cuando el bienestar está en este nivel, la conversación ya no le corresponde solo a RRHH: le corresponde a la alta dirección.`;
             } else if (results.globalPercentage <= 55) {
-                return `La organización está en un punto de inflexión crítico. Organizaciones que han navegado exitosamente esta transición reportan incrementos del 35-50% en engagement y reducción del 40-60% en rotación (McKinsey Health Institute).`;
+                return `Estás en el punto donde la mayoría de las organizaciones se queda parada: ya viste el diagnóstico, falta decidir moverse. El McKinsey Health Institute, junto al Foro Económico Mundial, calcula que gestionar bien la salud y el bienestar de las personas podría liberar hasta US$11,7 billones en valor económico global (informe "Thriving Workplaces", enero 2025). La pregunta ya no es si vale la pena invertir en esto, sino qué tan rápido decides hacerlo.`;
             } else if (results.globalPercentage <= 75) {
-                return `Los fundamentos están establecidos. Se requiere mayor consistencia e integración estratégica para consolidar avances. El riesgo principal es la complacencia.`;
+                return `Los fundamentos ya están puestos, y eso no es poco. Lo que falta ahora es consistencia: que lo que hoy funciona en algunos equipos se vuelva la forma en que se trabaja en toda la empresa. El riesgo en este nivel no es el descuido, es la comodidad — es fácil leer un resultado como este y asumir que ya se hizo suficiente.`;
             } else {
-                return `Su organización se posiciona en el top 10-15% de empleadores. La investigación muestra que organizaciones con culturas maduras de bienestar tienen 25% mayor rentabilidad y 65% menor rotación (Gallup).`;
+                return `Tu organización está en un lugar que pocas alcanzan. Willis Towers Watson encontró que las personas son el doble de propensas a quedarse y a comprometerse de verdad cuando su empleador prioriza su bienestar de forma sostenida, no solo en el discurso. El riesgo, aquí, es distinto: dejar de invertir porque "ya se logró".`;
             }
         }
         
@@ -741,28 +742,28 @@
         function getRecomendacionEstrategica(dimension, status) {
             const estrategias = {
                 liderazgo: {
-                    'CRÍTICO': `<div class="recommendation"><h4>🎯 Ruta Estratégica</h4><div class="strategy-highlight"><strong>Evidencia:</strong> Según McKinsey Health Institute, organizaciones que transformaron su liderazgo incrementaron engagement en 38% y redujeron rotación en 27%.</div><p style="margin-top:15px;"><strong>Acciones Inmediatas (0-3 meses):</strong></p><ul style="margin-left:20px;margin-top:10px;"><li>Implementar evaluaciones 360° trimestrales enfocadas en comportamientos de bienestar</li><li>Crear protocolo de "check-ins de bienestar" semanales de 15 minutos entre líderes y equipos</li><li>Programa intensivo de 8 semanas en liderazgo transformacional (comprobado: reduce burnout en 31%)</li></ul></div>`,
-                    'EN RIESGO': `<div class="recommendation"><h4>🎯 Ruta Estratégica</h4><div class="strategy-highlight"><strong>Evidencia:</strong> Organizaciones que clarificaron propósito reportaron 52% mayor satisfacción (Gallup).</div><ul style="margin-left:20px;margin-top:10px;"><li>Redefinir propósito mediante talleres de co-creación con todos los niveles</li><li>Implementar "rituales de reconocimiento" semanales</li><li>Crear "contratos de liderazgo" con 3 comportamientos de bienestar específicos</li></ul></div>`
+                    'CRÍTICO': `<div class="recommendation"><h4>🎯 Ruta Estratégica</h4><div class="strategy-highlight"><strong>Lo que muestra la evidencia:</strong> el McKinsey Health Institute encuestó a más de 30.000 personas en 30 países y encontró que la cultura de equipo es el factor que más pesa en la seguridad psicológica — y que apenas 43% dice tener hoy una cultura de equipo positiva. Los estilos de liderazgo consultivo y de apoyo la fortalecen; el autoritario la destruye.</div><p style="margin-top:15px;"><strong>Por dónde empezar (0-3 meses):</strong></p><ul style="margin-left:20px;margin-top:10px;"><li>Evaluar con honestidad cómo lideran hoy tus líderes, no solo qué resultados entregan</li><li>Sentar a la alta dirección frente a estos resultados y nombrar el costo de no actuar</li><li>Que cada líder se comprometa con comportamientos concretos, no con intenciones</li></ul></div>`,
+                    'EN RIESGO': `<div class="recommendation"><h4>🎯 Ruta Estratégica</h4><div class="strategy-highlight"><strong>Lo que muestra la evidencia:</strong> según Willis Towers Watson, las personas son el doble de propensas a quedarse y a comprometerse de verdad cuando su empleador prioriza su bienestar de forma consistente, no solo en el discurso.</div><ul style="margin-left:20px;margin-top:10px;"><li>Redefinir el propósito de la organización con las personas, no solo para ellas</li><li>Instalar espacios breves y regulares de reconocimiento entre líderes y equipos</li><li>Traducir el propósito en comportamientos de liderazgo observables, no en un afiche</li></ul></div>`
                 },
                 saludMental: {
-                    'CRÍTICO': `<div class="recommendation"><h4>🎯 Ruta Estratégica</h4><div class="alert-box danger"><strong>Urgencia:</strong> Deloitte reporta que cada dólar invertido en salud mental retorna $4 en productividad.</div><p style="margin-top:15px;"><strong>Acciones Inmediatas (0-1 mes):</strong></p><ul style="margin-left:20px;margin-top:10px;"><li>Contratar EAP con cobertura 24/7 y máximo 48 horas para primera cita</li><li>Implementar plataforma digital de apoyo psicológico (Ifeel, Calm Business, Headspace Work)</li><li>Capacitar a 100% de líderes en detección temprana de señales de alerta (4 horas)</li><li>Implementar "días de salud mental" sin justificación (probado: reduce ausentismo en 18%)</li></ul></div>`,
-                    'EN RIESGO': `<div class="recommendation"><h4>🎯 Ruta Estratégica</h4><div class="strategy-highlight"><strong>Evidencia:</strong> Programas continuos de educación en salud mental reportan 29% menos incapacidad (Integrated Benefits Institute).</div><ul style="margin-left:20px;margin-top:10px;"><li>Transformar eventos esporádicos en programa anual de 12 temas mensuales</li><li>Crear "círculos de bienestar emocional" facilitados por embajadores certificados</li><li>Implementar pulsos mensuales de clima emocional (3 preguntas, >70% respuesta)</li></ul></div>`
+                    'CRÍTICO': `<div class="recommendation"><h4>🎯 Ruta Estratégica</h4><div class="alert-box danger"><strong>El piso ya no es opcional:</strong> con el SISAT vigente en Ecuador, toda empresa —sin importar su tamaño— debe tener un programa de cuidado de la salud mental, y a partir de 300 colaboradores la norma exige un profesional de psicología. El SISAT pone el piso; el techo lo pones tú.</div><p style="margin-top:15px;"><strong>Por dónde empezar (0-1 mes):</strong></p><ul style="margin-left:20px;margin-top:10px;"><li>Verificar qué exige el SISAT para tu empresa según tu número de colaboradores y cerrar esa brecha primero</li><li>Garantizar una primera cita psicológica en un plazo corto y conocido por todos</li><li>Capacitar a tus líderes para detectar a tiempo señales de alerta</li></ul></div>`,
+                    'EN RIESGO': `<div class="recommendation"><h4>🎯 Ruta Estratégica</h4><div class="strategy-highlight"><strong>Lo que muestra la evidencia:</strong> según el Integrated Benefits Institute, de todos los beneficios que una empresa puede ofrecer, los de salud mental son los que más se asocian con una reducción real del ausentismo.</div><ul style="margin-left:20px;margin-top:10px;"><li>Convertir eventos aislados en un programa anual con temas mensuales concretos</li><li>Crear espacios de conversación seguros, facilitados por profesionales certificados</li><li>Medir el clima emocional con pulsos breves y frecuentes, no con una encuesta al año</li></ul></div>`
                 },
                 bienestarFinanciero: {
-                    'CRÍTICO': `<div class="recommendation"><h4>🎯 Ruta Estratégica</h4><div class="alert-box danger"><strong>Impacto:</strong> PwC reporta que 63% de colaboradores con estrés financiero pierden 8 horas/semana de productividad.</div><p style="margin-top:15px;"><strong>Acciones Urgentes (0-2 meses):</strong></p><ul style="margin-left:20px;margin-top:10px;"><li>Encuesta confidencial de bienestar financiero (endeudamiento, capacidad ahorro, estrés)</li><li>Auditoría externa de equidad salarial (brecha aceptable <5%)</li><li>Ajustar salarios por debajo de percentil 50 a mínimo percentil 60</li><li>Ofrecer adelanto de nómina sin interés (probado: reduce endeudamiento en 34%)</li></ul></div>`,
-                    'EN RIESGO': `<div class="recommendation"><h4>🎯 Ruta Estratégica</h4><div class="strategy-highlight"><strong>Evidencia:</strong> Programas de educación financiera reportan 23% mayor retención (Fidelity Workplace Study).</div><ul style="margin-left:20px;margin-top:10px;"><li>Programa anual con 4 módulos: presupuesto, deudas, ahorro, inversión</li><li>Asesoría financiera personalizada trimestral</li><li>Publicar rangos salariales por nivel y rol para transparencia</li></ul></div>`
+                    'CRÍTICO': `<div class="recommendation"><h4>🎯 Ruta Estratégica</h4><div class="alert-box danger"><strong>La cifra que no cuadra:</strong> Willis Towers Watson encontró que el bienestar financiero es la principal preocupación de 66% de las personas, pero apenas 23% de las empresas lo prioriza — y solo 19% dice ser efectiva ahí.</div><p style="margin-top:15px;"><strong>Por dónde empezar (0-2 meses):</strong></p><ul style="margin-left:20px;margin-top:10px;"><li>Preguntar con confidencialidad cómo está realmente la situación financiera de tu gente</li><li>Auditar tu equidad salarial y corregir con transparencia lo que no se sostiene</li><li>Priorizar beneficios que impulsen el ahorro y el aprendizaje, no el endeudamiento</li></ul></div>`,
+                    'EN RIESGO': `<div class="recommendation"><h4>🎯 Ruta Estratégica</h4><div class="strategy-highlight"><strong>Lo que muestra la evidencia:</strong> la misma investigación de Willis Towers Watson confirma que las personas priorizan su bienestar financiero casi tres veces más que sus propios empleadores.</div><ul style="margin-left:20px;margin-top:10px;"><li>Diseñar un programa anual que cubra presupuesto, deuda, ahorro e inversión</li><li>Ofrecer asesoría financiera personalizada, no solo información general</li><li>Publicar los rangos salariales por nivel y rol para sostener la confianza</li></ul></div>`
                 },
                 desarrolloProfesional: {
-                    'CRÍTICO': `<div class="recommendation"><h4>🎯 Ruta Estratégica</h4><div class="alert-box danger"><strong>Dato:</strong> LinkedIn reporta que 94% de colaboradores permanecerían más si la empresa invirtiera en desarrollo. Falta de crecimiento = causa #1 de renuncia.</div><p style="margin-top:15px;"><strong>Fundamentos (0-3 meses):</strong></p><ul style="margin-left:20px;margin-top:10px;"><li>Sistema básico con conversaciones trimestrales estructuradas</li><li>Matriz de competencias por rol con criterios objetivos</li><li>Diseñar rutas de carrera en Y, T y W con requisitos claros</li><li>Presupuesto anual de desarrollo (benchmark: $1,500/persona/año)</li></ul></div>`,
-                    'EN RIESGO': `<div class="recommendation"><h4>🎯 Ruta Estratégica</h4><div class="strategy-highlight"><strong>Evidencia:</strong> Rutas claras reportan 40% mayor retención de alto desempeño (Gallup).</div><ul style="margin-left:20px;margin-top:10px;"><li>Crear arquitectura de roles con 3-5 niveles diferenciados</li><li>Institucionalizar feedback 360°, feedforward y reconocimiento peer-to-peer</li><li>Programa diferenciado para talentos con rotaciones estratégicas</li></ul></div>`
+                    'CRÍTICO': `<div class="recommendation"><h4>🎯 Ruta Estratégica</h4><div class="alert-box danger"><strong>Lo que dice la evidencia:</strong> la falta de desarrollo y de avance profesional sigue siendo, según McKinsey & Company, la razón número uno que las personas dan cuando renuncian.</div><p style="margin-top:15px;"><strong>Por dónde empezar (0-3 meses):</strong></p><ul style="margin-left:20px;margin-top:10px;"><li>Instalar conversaciones trimestrales de desarrollo, no solo de resultados</li><li>Definir con criterios claros qué se necesita para avanzar en cada rol</li><li>Diseñar rutas de crecimiento que no dependan únicamente de subir a jefatura</li></ul></div>`,
+                    'EN RIESGO': `<div class="recommendation"><h4>🎯 Ruta Estratégica</h4><div class="strategy-highlight"><strong>Lo que muestra la evidencia:</strong> las organizaciones que mejor desarrollan a su gente promueven internamente a tasas notablemente más altas y retienen más al talento que ya formaron, según McKinsey & Company.</div><ul style="margin-left:20px;margin-top:10px;"><li>Institucionalizar el feedback, el feedforward y el reconocimiento entre pares</li><li>Diseñar un programa diferenciado para quienes muestran alto potencial</li><li>Abrir movilidad interna real antes de salir a buscar talento afuera</li></ul></div>`
                 },
                 energiaVital: {
-                    'CRÍTICO': `<div class="recommendation"><h4>🎯 Ruta Estratégica</h4><div class="alert-box danger"><strong>Urgencia:</strong> CDC reporta que 6 enfermedades crónicas cuestan $36,000/colaborador/año en productividad perdida.</div><p style="margin-top:15px;"><strong>Sistema (0-2 meses):</strong></p><ul style="margin-left:20px;margin-top:10px;"><li>Integrar exámenes ocupacionales, morbilidad y factores de riesgo en dashboard único</li><li>Identificar colaboradores en riesgo alto para intervención prioritaria</li><li>Programa de activación física: clases grupales, retos, membresías gym</li><li>Política de comida saludable: 80% opciones nutritivas en comedores</li></ul></div>`,
-                    'EN RIESGO': `<div class="recommendation"><h4>🎯 Ruta Estratégica</h4><div class="strategy-highlight"><strong>Evidencia:</strong> Programas integrales reducen ausentismo en 28% y costos médicos en 26% (HBR).</div><ul style="margin-left:20px;margin-top:10px;"><li>Programa holístico: ejercicio + nutrición + prevención</li><li>Retos trimestrales de actividad física con incentivos</li><li>Screening anuales preventivos (presión, glucosa, colesterol, IMC)</li></ul></div>`
+                    'CRÍTICO': `<div class="recommendation"><h4>🎯 Ruta Estratégica</h4><div class="alert-box danger"><strong>Lo que dice la evidencia:</strong> según el CDC, nueve de cada diez dólares que Estados Unidos gasta en salud cada año corresponden a personas con enfermedades crónicas o condiciones de salud mental — muchas de ellas prevenibles.</div><p style="margin-top:15px;"><strong>Por dónde empezar (0-2 meses):</strong></p><ul style="margin-left:20px;margin-top:10px;"><li>Cruzar los resultados de exámenes ocupacionales con los factores de riesgo reales de tu gente</li><li>Priorizar a quienes muestran mayor riesgo, en lugar de programas genéricos para todos</li><li>Facilitar el acceso a actividad física dentro de la jornada, no solo fuera de ella</li></ul></div>`,
+                    'EN RIESGO': `<div class="recommendation"><h4>🎯 Ruta Estratégica</h4><div class="strategy-highlight"><strong>Lo que muestra la evidencia:</strong> la inactividad física, por sí sola, le cuesta a Estados Unidos más de US$190.000 millones al año en gasto de salud, según el CDC.</div><ul style="margin-left:20px;margin-top:10px;"><li>Combinar actividad física, nutrición y prevención en un solo programa, no en iniciativas sueltas</li><li>Lanzar retos trimestrales que generen constancia, no solo entusiasmo inicial</li><li>Hacer del chequeo preventivo anual parte de la rutina, no una excepción</li></ul></div>`
                 },
                 sostenibilidad: {
-                    'CRÍTICO': `<div class="recommendation"><h4>🎯 Ruta Estratégica</h4><div class="alert-box danger"><strong>Criticidad:</strong> Sin estrategia con gobernanza y recursos, cualquier mejora será temporal.</div><p style="margin-top:15px;"><strong>Gobernanza (0-2 meses):</strong></p><ul style="margin-left:20px;margin-top:10px;"><li>Elevar bienestar a prioridad de Junta Directiva con presentaciones trimestrales</li><li>Asignar presupuesto específico (benchmark: 2-4% de nómina total)</li><li>Crear rol de Chief Wellbeing Officer o Gerente de Bienestar</li><li>Políticas de cero tolerancia a discriminación con protocolo de denuncia seguro</li></ul></div>`,
-                    'EN RIESGO': `<div class="recommendation"><h4>🎯 Ruta Estratégica</h4><div class="strategy-highlight"><strong>Evidencia:</strong> Estrategia formal reporta 3x mayor ROI (Deloitte).</div><ul style="margin-left:20px;margin-top:10px;"><li>Formalizar estrategia con visión 3 años, objetivos, KPIs y roadmap</li><li>Difundir código de principios entre colaboradores, clientes, proveedores</li><li>Programa 3R con metas cuantificables anuales</li></ul></div>`
+                    'CRÍTICO': `<div class="recommendation"><h4>🎯 Ruta Estratégica</h4><div class="alert-box danger"><strong>Lo que no tiene gobernanza, no se sostiene:</strong> Willis Towers Watson encontró que hoy solo 11% de las empresas trata el bienestar como un elemento fundacional de su estrategia de capital humano, aunque 37% planea hacerlo en los próximos tres años.</div><p style="margin-top:15px;"><strong>Por dónde empezar (0-2 meses):</strong></p><ul style="margin-left:20px;margin-top:10px;"><li>Llevar estos resultados a la alta dirección, no dejarlos en un reporte interno</li><li>Nombrar a alguien responsable del bienestar con acceso real a quien decide</li><li>Actualizar tus políticas de no discriminación y de espacios de trabajo seguros</li></ul></div>`,
+                    'EN RIESGO': `<div class="recommendation"><h4>🎯 Ruta Estratégica</h4><div class="strategy-highlight"><strong>Lo que muestra la evidencia:</strong> según Willis Towers Watson, solo 33% de las empresas ha logrado integrar el bienestar en su cultura organizacional de forma real, aunque 46% dice que lo hará en los próximos tres años.</div><ul style="margin-left:20px;margin-top:10px;"><li>Formalizar tu estrategia con visión, objetivos e indicadores a tres años</li><li>Difundir tu código de principios más allá de RRHH, hacia toda la organización</li><li>Fijar metas cuantificables y medirlas con la misma disciplina que el negocio</li></ul></div>`
                 }
             };
             return estrategias[dimension]?.[status] || '<div class="recommendation"><p>Mantener y optimizar prácticas actuales.</p></div>';
@@ -774,24 +775,18 @@
             let html = '<h3 class="section-title" style="margin-top:40px;">📋 Plan de Acción en 3 Fases</h3>';
             
             if (criticos.length > 0) {
-                html += `<div class="phase-box" style="border-color:#f44336;"><h4 style="color:#f44336;">FASE 1 (0-6 MESES): ESTABILIZACIÓN</h4><p><strong>Objetivo:</strong> Reducir riesgos inmediatos</p><p><strong>Dimensiones:</strong> ${criticos.map(d=>d.name).join(', ')}</p><ul style="margin-left:20px;margin-top:10px;"><li>Intervención inmediata en ${criticos.length} dimensión(es) crítica(s)</li><li>Asignación de presupuesto de emergencia</li><li>Evaluación mensual de indicadores</li></ul><p style="margin-top:15px;"><strong>Inversión:</strong> $${(criticos.length*15000).toLocaleString()} USD</p></div>`;
+                html += `<div class="phase-box" style="border-color:#f44336;"><h4 style="color:#f44336;">FASE 1 (0-6 MESES): ESTABILIZACIÓN</h4><p><strong>Objetivo:</strong> Reducir los riesgos más urgentes</p><p><strong>Dimensiones:</strong> ${criticos.map(d=>d.name).join(', ')}</p><ul style="margin-left:20px;margin-top:10px;"><li>Intervenir primero en ${criticos.length} dimensión(es) que están en estado crítico</li><li>Destinar recursos con carácter de urgencia a lo que no puede esperar</li><li>Revisar mensualmente si lo que se está haciendo realmente está moviendo la aguja</li></ul></div>`;
             }
             if (riesgo.length > 0) {
-                html += `<div class="phase-box" style="border-color:#ff9800;"><h4 style="color:#ff9800;">FASE 2 (6-18 MESES): FORTALECIMIENTO</h4><p><strong>Objetivo:</strong> Construir procesos sostenibles</p><p><strong>Dimensiones:</strong> ${riesgo.map(d=>d.name).join(', ')}</p><ul style="margin-left:20px;margin-top:10px;"><li>Desarrollo con programas estructurados</li><li>Consolidación de mejoras de Fase 1</li><li>Evaluación trimestral</li></ul></div>`;
+                html += `<div class="phase-box" style="border-color:#ff9800;"><h4 style="color:#ff9800;">FASE 2 (6-18 MESES): FORTALECIMIENTO</h4><p><strong>Objetivo:</strong> Convertir las mejoras en procesos que se sostengan solos</p><p><strong>Dimensiones:</strong> ${riesgo.map(d=>d.name).join(', ')}</p><ul style="margin-left:20px;margin-top:10px;"><li>Instalar programas estructurados, no acciones sueltas</li><li>Consolidar lo que ya empezó a funcionar en la Fase 1</li><li>Revisar el avance cada trimestre</li></ul></div>`;
             }
-            html += `<div class="phase-box"><h4>FASE 3 (18-36 MESES): OPTIMIZACIÓN</h4><p><strong>Objetivo:</strong> Innovación y posicionamiento referente</p><ul style="margin-left:20px;margin-top:10px;"><li>Mejora continua de todas las dimensiones</li><li>Certificaciones internacionales</li><li>Benchmarking sectorial</li></ul></div>`;
+            html += `<div class="phase-box"><h4>FASE 3 (18-36 MESES): OPTIMIZACIÓN</h4><p><strong>Objetivo:</strong> Que el bienestar deje de ser un proyecto y se vuelva la forma en que opera la empresa</p><ul style="margin-left:20px;margin-top:10px;"><li>Seguir mejorando las seis dimensiones de forma continua</li><li>Comparar tu progreso con el de otras empresas del sector</li></ul></div>`;
             return html;
         }
         
         function generarMetricasImpacto(results) {
-            const turnoverReduction = results.criticalDimensions.length >= 2 ? 35 : 20;
-            const productivityGain = results.criticalDimensions.length >= 2 ? 25 : 15;
-            const investment = results.criticalDimensions.length * 15000 + results.riskDimensions.length * 8000;
-            const benefit = 100000 * (turnoverReduction/100) + 80000 * (productivityGain/100);
-            const roi = ((benefit - investment) / investment * 100).toFixed(0);
-            
             return `
-                <h3 class="section-title" style="margin-top:40px;">📊 Métricas de Impacto Proyectado</h3>
+                <h3 class="section-title" style="margin-top:40px;">📊 Panorama de Mejora Proyectada</h3>
                 <div class="metric-grid">
                     <div class="metric-card">
                         <div class="metric-label">Puntuación Actual</div>
@@ -801,18 +796,13 @@
                         <div class="metric-label">Meta 18 Meses</div>
                         <div class="metric-value" style="color:#47c0ef;">${(results.globalPercentage + 20).toFixed(1)}%</div>
                     </div>
-                    <div class="metric-card">
-                        <div class="metric-label">ROI Estimado</div>
-                        <div class="metric-value" style="color:#44cc44;">${roi}%</div>
-                    </div>
                 </div>
                 <div class="insight-box">
-                    <strong>💰 Beneficios Proyectados (18 meses):</strong>
+                    <strong>💡 Lo que muestra la evidencia:</strong>
                     <ul style="margin-left:20px;margin-top:10px;">
-                        <li>Reducción de rotación: ${turnoverReduction}%</li>
-                        <li>Mejora en productividad: ${productivityGain}%</li>
-                        <li>Reducción de ausentismo: 30%</li>
-                        <li>Mejora en engagement: 40%</li>
+                        <li>Willis Towers Watson: las personas son el doble de propensas a quedarse y a comprometerse de verdad cuando su empleador prioriza su bienestar de forma sostenida, no solo en el discurso.</li>
+                        <li>Integrated Benefits Institute: de todos los beneficios que una empresa puede ofrecer, los de salud mental son los que más se asocian con una reducción real del ausentismo.</li>
+                        <li>McKinsey Health Institute, junto al Foro Económico Mundial: gestionar bien la salud y el bienestar de las personas podría liberar hasta US$11,7 billones en valor económico global (informe "Thriving Workplaces", enero 2025).</li>
                     </ul>
                 </div>
             `;
@@ -836,296 +826,211 @@
         function generarAnalisisDimensionCritica(dimension, respuestas) {
             const detalleCritico = {
                 liderazgo: {
-                    titulo: 'Liderazgo y Propósito: Base de la Transformación Cultural',
-                    impacto: 'El liderazgo es el multiplicador de cualquier iniciativa de bienestar. Sin líderes comprometidos y capacitados, ningún programa tendrá éxito sostenible. Esta dimensión impacta directamente en seguridad psicológica, engagement, retención de talento y cultura organizacional.',
-                    costoInaccion: 'Organizaciones con liderazgo deficiente experimentan 3x más rotación de talento, 2x más ausentismo y 50% menos productividad. El costo promedio de reemplazar un líder es 200% de su salario anual.',
+                    titulo: 'Liderazgo y Propósito: el multiplicador de todo lo demás',
+                    impacto: 'Ningún programa de bienestar sobrevive a un liderazgo que no lo sostiene. Esta dimensión no compite con las otras cinco: las atraviesa a todas — en cómo se comunica, cómo se decide y cómo se trata a la gente cuando nadie está mirando.',
+                    costoInaccion: 'La encuesta global del McKinsey Health Institute (más de 30.000 personas, 30 países, 2023) muestra que la cultura de equipo es el factor que más determina la seguridad psicológica, y que el estilo de liderazgo autoritario la destruye mientras el consultivo y el de apoyo la construyen. Ese hallazgo, solo, explica buena parte de por qué unos equipos rinden y otros se apagan.',
                     rutaDetallada: `
                         <div style="background: white; padding: 20px; border-radius: 10px; margin: 15px 0;">
                             <h4 style="color: #8F579F; margin-bottom: 15px;">📍 RUTA DE TRANSFORMACIÓN DETALLADA</h4>
-                            
+
                             <div style="background: #ffebee; padding: 15px; border-radius: 8px; margin: 10px 0; border-left: 4px solid #f44336;">
                                 <strong style="color: #d32f2f;">SEMANAS 1-4: DIAGNÓSTICO Y COMPROMISO</strong>
                                 <ul style="margin-left: 20px; margin-top: 10px;">
-                                    <li>Realizar evaluación 360° a todos los líderes enfocada en comportamientos de bienestar (no solo resultados)</li>
-                                    <li>Sesión de sensibilización con alta dirección: presentar resultados del assessment y costo de inacción</li>
-                                    <li>Cada líder crea su "Compromiso Personal de Bienestar" con 3 comportamientos específicos</li>
-                                    <li>Comunicar transparentemente a toda la organización el inicio del programa de transformación</li>
+                                    <li>Evaluar con honestidad cómo lideran hoy tus líderes —no solo qué resultados entregan— y compartir esos hallazgos con la alta dirección sin suavizarlos</li>
                                 </ul>
                             </div>
-                            
+
                             <div style="background: #fff3e0; padding: 15px; border-radius: 8px; margin: 10px 0; border-left: 4px solid #ff9800;">
-                                <strong style="color: #f57c00;">SEMANAS 5-12: DESARROLLO INTENSIVO</strong>
+                                <strong style="color: #f57c00;">SEMANAS 5-12: DESARROLLO</strong>
                                 <ul style="margin-left: 20px; margin-top: 10px;">
-                                    <li>Programa de 8 semanas en Liderazgo Transformacional (2 horas/semana, presencial + virtual)</li>
-                                    <li>Temas: seguridad psicológica, inteligencia emocional, comunicación empática, gestión del cambio</li>
-                                    <li>Coaching ejecutivo 1:1 para el 20% de líderes con mayor impacto en clima (6 sesiones/persona)</li>
-                                    <li>Implementar "check-ins de bienestar" semanales de 15 minutos (formato estructurado)</li>
-                                    <li>Crear "Consejo de Bienestar" con representación de todos los niveles</li>
+                                    <li>Formar a tus líderes en seguridad psicológica y comunicación con base en evidencia, priorizando a quienes tienen más impacto en el clima de sus equipos</li>
                                 </ul>
                             </div>
-                            
+
                             <div style="background: #e3f2fd; padding: 15px; border-radius: 8px; margin: 10px 0; border-left: 4px solid #2196f3;">
                                 <strong style="color: #1976d2;">MESES 4-6: INSTITUCIONALIZACIÓN</strong>
                                 <ul style="margin-left: 20px; margin-top: 10px;">
-                                    <li>Integrar competencias de liderazgo consciente en evaluación de desempeño (peso mínimo 30%)</li>
-                                    <li>Crear sistema de reconocimiento para líderes que modelen comportamientos deseados</li>
-                                    <li>Redefinir o reforzar propósito organizacional mediante talleres de co-creación</li>
-                                    <li>Implementar encuesta mensual de pulso de confianza en liderazgo (3 preguntas, 2 minutos)</li>
-                                    <li>Primera medición de impacto: comparar indicadores vs. baseline inicial</li>
+                                    <li>Incluir comportamientos de liderazgo consciente en la evaluación de desempeño, para que dejen de ser aspiración y se vuelvan criterio</li>
                                 </ul>
                             </div>
-                            
+
                             <p style="margin-top: 20px; padding: 15px; background: #f3e6f7; border-radius: 8px;">
-                                <strong style="color: #8F579F;">🎯 Meta de 6 meses:</strong> Incremento del 25% en índice de confianza hacia liderazgo y reducción del 15% en rotación voluntaria de equipos con líderes del programa.
+                                <strong style="color: #8F579F;">🎯 Meta de 6 meses:</strong> Un incremento medible en la confianza hacia el liderazgo, y una reducción visible en la rotación voluntaria de los equipos que pasaron por el programa.
                             </p>
                         </div>
                     `
                 },
                 saludMental: {
-                    titulo: 'Salud Mental: El Activo Invisible Más Valioso',
-                    impacto: 'La salud mental es el fundamento de la productividad, creatividad, colaboración y resiliencia organizacional. Una persona con mala salud mental pierde en promedio 8 días productivos al mes por "presentismo" (estar físicamente pero mentalmente ausente).',
-                    costoInaccion: 'La OMS estima que depresión y ansiedad cuestan a la economía global $1 trillón anuales en productividad perdida. A nivel organizacional: incremento del 40% en ausentismo, 35% en rotación y 50% en accidentes laborales.',
+                    titulo: 'Salud Mental: ya no es un plus, es la norma',
+                    impacto: 'La salud mental de tu gente deja de ser solo un tema de bienestar y pasa a ser, con el SISAT vigente, un tema de cumplimiento. Eso cambia la conversación: ya no se trata de si conviene invertir, sino de qué tan preparada está tu empresa frente a lo que la norma ya exige.',
+                    costoInaccion: 'El SISAT bajó el umbral de aplicación de 100 a 1 trabajador y volvió obligatorio el programa de cuidado de la salud mental para todas las empresas, sin excepción de tamaño. A partir de 300 colaboradores, además, exige un profesional de psicología. El sistema dejó de ser un servicio médico aislado y pasó a ser un sistema auditable a través de la plataforma del Ministerio. El SISAT pone el piso; el techo lo pones tú.',
                     rutaDetallada: `
                         <div style="background: white; padding: 20px; border-radius: 10px; margin: 15px 0;">
                             <h4 style="color: #8F579F; margin-bottom: 15px;">📍 RUTA DE TRANSFORMACIÓN DETALLADA</h4>
-                            
+
                             <div style="background: #ffebee; padding: 15px; border-radius: 8px; margin: 10px 0; border-left: 4px solid #f44336;">
-                                <strong style="color: #d32f2f;">SEMANA 1-2: RESPUESTA DE EMERGENCIA</strong>
+                                <strong style="color: #d32f2f;">SEMANAS 1-2: RESPUESTA INMEDIATA</strong>
                                 <ul style="margin-left: 20px; margin-top: 10px;">
-                                    <li>Contratar EAP (Employee Assistance Program) con cobertura 24/7 - proveedores: iFeel, BetterHelp for Work, Modern Health</li>
-                                    <li>Garantizar primera cita psicológica en máximo 48 horas</li>
-                                    <li>Comunicar recursos disponibles mediante múltiples canales (email, carteles, reuniones, intranet)</li>
-                                    <li>Implementar línea de crisis 24/7 con psicólogos certificados</li>
-                                    <li>Crear protocolo de actuación para líderes ante señales de alerta (suicidio, crisis, etc.)</li>
+                                    <li>Verificar qué exige exactamente el SISAT para tu empresa según tu número de colaboradores, y cerrar primero esa brecha legal</li>
                                 </ul>
                             </div>
-                            
+
                             <div style="background: #fff3e0; padding: 15px; border-radius: 8px; margin: 10px 0; border-left: 4px solid #ff9800;">
-                                <strong style="color: #f57c00;">SEMANAS 3-8: EDUCACIÓN Y SENSIBILIZACIÓN</strong>
+                                <strong style="color: #f57c00;">SEMANAS 3-8: EDUCACIÓN</strong>
                                 <ul style="margin-left: 20px; margin-top: 10px;">
-                                    <li>Capacitar al 100% de líderes en detección temprana de señales de alerta (programa de 4 horas)</li>
-                                    <li>Webinar mensual sobre temas específicos: ansiedad, depresión, burnout, duelo, estrés postraumático</li>
-                                    <li>Certificar al 5% de la plantilla en Primeros Auxilios Psicológicos (MHFA International - 8 horas)</li>
-                                    <li>Crear "espacios de conversación seguros" mensuales facilitados por psicólogos clínicos</li>
-                                    <li>Implementar plataforma digital de salud mental: meditación, terapia chat, recursos educativos</li>
+                                    <li>Capacitar a tus líderes para detectar a tiempo señales de alerta, con un protocolo claro de a quién y cómo derivar cada caso</li>
                                 </ul>
                             </div>
-                            
+
                             <div style="background: #e3f2fd; padding: 15px; border-radius: 8px; margin: 10px 0; border-left: 4px solid #2196f3;">
-                                <strong style="color: #1976d2;">MESES 3-6: CULTURA Y SOSTENIBILIDAD</strong>
+                                <strong style="color: #1976d2;">MESES 3-6: CULTURA</strong>
                                 <ul style="margin-left: 20px; margin-top: 10px;">
-                                    <li>Implementar "días de salud mental" sin justificación médica (2 al año, renovables)</li>
-                                    <li>Política de "derecho a desconexión": no correos/mensajes fuera de horario laboral</li>
-                                    <li>Crear red de "embajadores de bienestar mental" (empleados certificados que dan soporte peer-to-peer)</li>
-                                    <li>Pulsos mensuales anónimos de clima emocional (3 preguntas, 2 minutos, tasa >70%)</li>
-                                    <li>Integrar indicadores de salud mental en dashboard de RRHH con revisión mensual</li>
-                                    <li>Testimonios de colaboradores que usaron recursos (con permiso) para reducir estigma</li>
+                                    <li>Crear espacios de conversación seguros sobre salud mental, sostenidos en el tiempo y no solo en fechas conmemorativas</li>
                                 </ul>
                             </div>
-                            
+
                             <p style="margin-top: 20px; padding: 15px; background: #f3e6f7; border-radius: 8px;">
-                                <strong style="color: #8F579F;">🎯 Meta de 6 meses:</strong> 40% de uso de recursos de apoyo, reducción del 25% en ausentismo por causas de salud mental, incremento del 35% en percepción de que "la empresa se preocupa por mi bienestar".
+                                <strong style="color: #8F579F;">🎯 Meta de 6 meses:</strong> Un programa de salud mental que cumple con el SISAT y que además se nota: más personas usando los recursos disponibles y menos estigma para pedir ayuda.
                             </p>
                         </div>
                     `
                 },
                 bienestarFinanciero: {
-                    titulo: 'Bienestar Financiero: El Elefante en la Habitación',
-                    impacto: 'El estrés financiero es el distractor cognitivo #1 en el trabajo. Una persona con problemas financieros pierde hasta 8 horas semanales de productividad pensando en dinero. Además, es el predictor más fuerte de rotación voluntaria - especialmente en talento joven.',
-                    costoInaccion: 'PwC reporta que empleados con estrés financiero alto tienen 2x más probabilidad de buscar nuevo empleo, 5x más probabilidad de distraerse en el trabajo y 4x más probabilidad de tener problemas de salud. Costo organizacional: pérdida de productividad del 12-15% anual.',
+                    titulo: 'Bienestar Financiero: el tema del que casi nadie habla',
+                    impacto: 'El estrés financiero no se queda en la vida personal de tu gente: entra a la oficina con ellos. Willis Towers Watson encontró que es la principal preocupación de bienestar para 66% de las personas — y, al mismo tiempo, lo último que priorizan la mayoría de las empresas.',
+                    costoInaccion: 'Esa misma investigación muestra que las personas priorizan su bienestar financiero casi tres veces más que sus propios empleadores, y que menos de 2 de cada 10 empresas se consideran efectivas ayudando en esto. La brecha entre lo que tu gente necesita y lo que le ofreces es, hoy, más ancha de lo que parece.',
                     rutaDetallada: `
                         <div style="background: white; padding: 20px; border-radius: 10px; margin: 15px 0;">
                             <h4 style="color: #8F579F; margin-bottom: 15px;">📍 RUTA DE TRANSFORMACIÓN DETALLADA</h4>
-                            
+
                             <div style="background: #ffebee; padding: 15px; border-radius: 8px; margin: 10px 0; border-left: 4px solid #f44336;">
-                                <strong style="color: #d32f2f;">SEMANAS 1-4: DIAGNÓSTICO PROFUNDO</strong>
+                                <strong style="color: #d32f2f;">SEMANAS 1-4: DIAGNÓSTICO</strong>
                                 <ul style="margin-left: 20px; margin-top: 10px;">
-                                    <li>Encuesta confidencial de bienestar financiero (herramienta: Financial Health Network Assessment)</li>
-                                    <li>Medir: nivel de endeudamiento, capacidad de ahorro, estrés financiero, alfabetización financiera</li>
-                                    <li>Auditoría externa de equidad salarial por género, antigüedad, rol (brecha aceptable <3%)</li>
-                                    <li>Benchmarking salarial con 5 competidores principales del sector (fuente: glassdoor, payscale, asociaciones)</li>
-                                    <li>Identificar colaboradores en riesgo financiero alto para intervención prioritaria</li>
+                                    <li>Levantar, con confidencialidad, cómo está realmente la situación financiera de tu gente: endeudamiento, capacidad de ahorro, nivel de estrés</li>
                                 </ul>
                             </div>
-                            
+
                             <div style="background: #fff3e0; padding: 15px; border-radius: 8px; margin: 10px 0; border-left: 4px solid #ff9800;">
-                                <strong style="color: #f57c00;">SEMANAS 5-12: CORRECCIÓN ESTRUCTURAL</strong>
+                                <strong style="color: #f57c00;">SEMANAS 5-12: CORRECCIÓN</strong>
                                 <ul style="margin-left: 20px; margin-top: 10px;">
-                                    <li>Ajustar salarios por debajo de percentil 50 del mercado a mínimo percentil 60 (inversión crítica)</li>
-                                    <li>Publicar rangos salariales por nivel y rol para garantizar transparencia total</li>
-                                    <li>Ofrecer adelanto de nómina sin interés hasta 50% (reduce préstamos usureros en 34%)</li>
-                                    <li>Programa intensivo de educación financiera: 4 talleres mensuales (presupuesto, deudas, ahorro, inversión)</li>
-                                    <li>Asesoría financiera personalizada para colaboradores en riesgo alto (1 hora/persona/mes)</li>
-                                    <li>Eliminar beneficios que generan endeudamiento, priorizar beneficios educativos</li>
+                                    <li>Auditar tu equidad salarial y corregir con transparencia lo que no se sostiene frente al mercado</li>
                                 </ul>
                             </div>
-                            
+
                             <div style="background: #e3f2fd; padding: 15px; border-radius: 8px; margin: 10px 0; border-left: 4px solid #2196f3;">
-                                <strong style="color: #1976d2;">MESES 4-6: CONSTRUCCIÓN DE FUTURO</strong>
+                                <strong style="color: #1976d2;">MESES 4-6: FUTURO</strong>
                                 <ul style="margin-left: 20px; margin-top: 10px;">
-                                    <li>Crear fondo de ahorro voluntario con match empresarial (empresa aporta 50% hasta cierto tope)</li>
-                                    <li>Implementar fondo de emergencia colectivo para casos críticos (enfermedad, accidente, fallecimiento)</li>
-                                    <li>Ofrecer productos financieros ventajosos: fondo de retiro, inversión, seguros</li>
-                                    <li>Programa de planificación financiera de largo plazo (jubilación, educación hijos, vivienda)</li>
-                                    <li>App de gestión financiera personalizada con gamificación y metas individuales</li>
-                                    <li>Medición de impacto: correlacionar bienestar financiero con engagement y productividad</li>
+                                    <li>Ofrecer educación y asesoría financiera personalizada, priorizando a quienes muestran mayor riesgo</li>
                                 </ul>
                             </div>
-                            
+
                             <p style="margin-top: 20px; padding: 15px; background: #f3e6f7; border-radius: 8px;">
-                                <strong style="color: #8F579F;">🎯 Meta de 6 meses:</strong> Reducir en 40% el porcentaje de colaboradores con estrés financiero alto, incrementar capacidad de ahorro en 25%, reducir rotación en 20%.
+                                <strong style="color: #8F579F;">🎯 Meta de 6 meses:</strong> Menos personas reportando estrés financiero alto, y una relación más transparente entre la empresa y su gente sobre el tema del dinero.
                             </p>
                         </div>
                     `
                 },
                 desarrolloProfesional: {
-                    titulo: 'Desarrollo Profesional: El Contrato Psicológico del Siglo XXI',
-                    impacto: 'La percepción de estancamiento profesional es la causa #1 de rotación voluntaria en talento calificado. Los colaboradores de hoy no buscan solo un empleo, buscan una plataforma de crecimiento. Sin desarrollo visible, la empresa se convierte en un "trampolín" temporal.',
-                    costoInaccion: 'LinkedIn Workforce Report: organizaciones sin programas claros de desarrollo experimentan 3x más rotación de alto desempeño. El costo de perder un colaborador de alto potencial es 200-300% de su salario anual. Además, la reputación como empleador se deteriora rápidamente.',
+                    titulo: 'Desarrollo Profesional: el contrato que hoy espera tu gente',
+                    impacto: 'Nadie se queda donde siente que dejó de crecer. La falta de desarrollo y de avance profesional sigue siendo, según McKinsey & Company, la razón número uno que las personas dan cuando renuncian — por encima del salario.',
+                    costoInaccion: 'Las organizaciones que mejor desarrollan a su gente no solo retienen más: promueven internamente a tasas notablemente más altas, según la misma investigación de McKinsey & Company. Sin rutas claras de crecimiento, tu empresa se convierte en un lugar de paso, no de carrera.',
                     rutaDetallada: `
                         <div style="background: white; padding: 20px; border-radius: 10px; margin: 15px 0;">
                             <h4 style="color: #8F579F; margin-bottom: 15px;">📍 RUTA DE TRANSFORMACIÓN DETALLADA</h4>
-                            
+
                             <div style="background: #ffebee; padding: 15px; border-radius: 8px; margin: 10px 0; border-left: 4px solid #f44336;">
-                                <strong style="color: #d32f2f;">SEMANAS 1-6: FUNDAMENTOS Y CLARIDAD</strong>
+                                <strong style="color: #d32f2f;">SEMANAS 1-6: FUNDAMENTOS</strong>
                                 <ul style="margin-left: 20px; margin-top: 10px;">
-                                    <li>Definir matriz de competencias por familia de roles (técnicas, liderazgo, negocio)</li>
-                                    <li>Crear arquitectura de roles con 3-5 niveles claramente diferenciados</li>
-                                    <li>Documentar criterios objetivos de progresión para cada nivel (skills, experiencia, impacto)</li>
-                                    <li>Implementar sistema básico de gestión de desempeño con conversaciones trimestrales estructuradas</li>
-                                    <li>Capacitar a líderes en cómo dar feedback constructivo y feedforward efectivo (4 horas)</li>
-                                    <li>Comunicar transparentemente rutas de carrera disponibles en portal interno</li>
+                                    <li>Definir con criterios objetivos qué se necesita para avanzar en cada rol, y comunicarlo con la misma claridad para todos</li>
                                 </ul>
                             </div>
-                            
+
                             <div style="background: #fff3e0; padding: 15px; border-radius: 8px; margin: 10px 0; border-left: 4px solid #ff9800;">
-                                <strong style="color: #f57c00;">SEMANAS 7-16: DISEÑO DE FUTURO</strong>
+                                <strong style="color: #f57c00;">SEMANAS 7-16: DISEÑO</strong>
                                 <ul style="margin-left: 20px; margin-top: 10px;">
-                                    <li>Diseñar rutas de carrera en Y (gerencial), T (especialización amplia) y W (doble especialización)</li>
-                                    <li>Crear planes de desarrollo personalizados para 100% de colaboradores (revisión trimestral)</li>
-                                    <li>Asignar presupuesto anual de desarrollo por persona (benchmark: $1,500-$2,000/año)</li>
-                                    <li>Identificar top 15% de talento de alto potencial para programa diferenciado</li>
-                                    <li>Implementar planes de sucesión para top 20 posiciones críticas</li>
-                                    <li>Política de promoción interna first: 70% de vacantes abiertas internamente primero</li>
-                                    <li>Sistema de feedback 360° semestral + reconocimiento peer-to-peer mensual</li>
+                                    <li>Construir rutas de crecimiento que no dependan únicamente de subir a un puesto de jefatura</li>
                                 </ul>
                             </div>
-                            
+
                             <div style="background: #e3f2fd; padding: 15px; border-radius: 8px; margin: 10px 0; border-left: 4px solid #2196f3;">
-                                <strong style="color: #1976d2;">MESES 5-6: ACELERACIÓN Y ESCALA</strong>
+                                <strong style="color: #1976d2;">MESES 5-6: ACELERACIÓN</strong>
                                 <ul style="margin-left: 20px; margin-top: 10px;">
-                                    <li>Lanzar Universidad Corporativa con programas por familia de roles y niveles</li>
-                                    <li>Implementar programa de rotaciones temporales entre áreas (3-6 meses)</li>
-                                    <li>Crear sistema de gestión del conocimiento para capturar aprendizajes críticos</li>
-                                    <li>Programa de mentoría formal: cada high potential tiene 1 mentor senior</li>
-                                    <li>Convenios con universidades para diplomados/maestrías con subsidio empresarial</li>
-                                    <li>Medición rigurosa: % de promociones internas, índice de desarrollo percibido, retención de talento</li>
+                                    <li>Abrir la movilidad interna como primera opción real, antes de salir a buscar talento afuera</li>
                                 </ul>
                             </div>
-                            
+
                             <p style="margin-top: 20px; padding: 15px; background: #f3e6f7; border-radius: 8px;">
-                                <strong style="color: #8F579F;">🎯 Meta de 6 meses:</strong> 80% de colaboradores con plan de desarrollo documentado, 60% de vacantes cubiertas internamente, reducción del 30% en rotación de alto potencial.
+                                <strong style="color: #8F579F;">🎯 Meta de 6 meses:</strong> Más vacantes cubiertas con talento interno, y una percepción más alta de que en tu empresa sí se puede crecer.
                             </p>
                         </div>
                     `
                 },
                 energiaVital: {
-                    titulo: 'Energía Vital: El Combustible del Alto Desempeño',
-                    impacto: 'La energía física y mental son recursos limitados y renovables. Organizaciones que descuidan la salud física de sus colaboradores pagan el precio en forma de enfermedades crónicas, ausentismo prolongado, costos médicos crecientes y años de vida productiva perdidos.',
-                    costoInaccion: 'CDC reporta que 6 enfermedades crónicas (diabetes, hipertensión, obesidad, enfermedades cardíacas, depresión, artritis) cuestan a empleadores $36,000 por colaborador afectado al año. El 86% de costos de salud empresariales son por enfermedades prevenibles.',
+                    titulo: 'Energía Vital: el combustible que nadie factura hasta que falta',
+                    impacto: 'La energía física y mental de tu gente es un recurso que se agota si nadie lo cuida. Cuando eso pasa, no se ve de inmediato: se ve meses después, en ausentismo, en errores y en gente que ya no da más.',
+                    costoInaccion: 'Según el CDC, nueve de cada diez dólares que Estados Unidos gasta en salud cada año corresponden a personas con enfermedades crónicas o condiciones de salud mental, buena parte de ellas prevenibles. La inactividad física, por sí sola, cuesta más de US$190.000 millones anuales en gasto de salud.',
                     rutaDetallada: `
                         <div style="background: white; padding: 20px; border-radius: 10px; margin: 15px 0;">
                             <h4 style="color: #8F579F; margin-bottom: 15px;">📍 RUTA DE TRANSFORMACIÓN DETALLADA</h4>
-                            
+
                             <div style="background: #ffebee; padding: 15px; border-radius: 8px; margin: 10px 0; border-left: 4px solid #f44336;">
-                                <strong style="color: #d32f2f;">SEMANAS 1-4: SISTEMA DE VIGILANCIA</strong>
+                                <strong style="color: #d32f2f;">SEMANAS 1-4: VIGILANCIA</strong>
                                 <ul style="margin-left: 20px; margin-top: 10px;">
-                                    <li>Integrar resultados de exámenes ocupacionales en dashboard único de salud organizacional</li>
-                                    <li>Cruzar datos de morbilidad (incapacidades) con factores de riesgo identificados</li>
-                                    <li>Identificar colaboradores con 2+ factores de riesgo metabólico para intervención prioritaria</li>
-                                    <li>Crear perfil de riesgo individual: bajo, medio, alto (confidencial, solo para médico ocupacional)</li>
-                                    <li>Implementar plataforma de seguimiento de metas de salud personalizadas con gamificación</li>
+                                    <li>Cruzar los resultados de tus exámenes ocupacionales con los factores de riesgo reales de tu gente, no tratarlos como trámites separados</li>
                                 </ul>
                             </div>
-                            
+
                             <div style="background: #fff3e0; padding: 15px; border-radius: 8px; margin: 10px 0; border-left: 4px solid #ff9800;">
-                                <strong style="color: #f57c00;">SEMANAS 5-12: ACTIVACIÓN Y EDUCACIÓN</strong>
+                                <strong style="color: #f57c00;">SEMANAS 5-12: ACTIVACIÓN</strong>
                                 <ul style="margin-left: 20px; margin-top: 10px;">
-                                    <li>Programa de activación física más allá de pausas: clases grupales 3x/semana (yoga, zumba, funcional)</li>
-                                    <li>Subsidio del 50% en membresías de gimnasios o apps de fitness (Fitbit, Apple Fitness+)</li>
-                                    <li>Retos trimestrales con incentivos tangibles: "10,000 pasos", "30 días sin azúcar", "Kilómetros corporativos"</li>
-                                    <li>Asesoría nutricional individualizada para colaboradores con diagnóstico (diabetes, hipertensión, obesidad)</li>
-                                    <li>Educación mensual sobre prevención: webinars de 45 minutos con especialistas certificados</li>
-                                    <li>Política de alimentación saludable: 80% de opciones nutritivas en comedores y máquinas expendedoras</li>
+                                    <li>Facilitar el acceso a actividad física dentro de la jornada laboral, no solo promoverla fuera de ella</li>
                                 </ul>
                             </div>
-                            
+
                             <div style="background: #e3f2fd; padding: 15px; border-radius: 8px; margin: 10px 0; border-left: 4px solid #2196f3;">
-                                <strong style="color: #1976d2;">MESES 4-6: MEDICINA PREVENTIVA</strong>
+                                <strong style="color: #1976d2;">MESES 4-6: PREVENCIÓN</strong>
                                 <ul style="margin-left: 20px; margin-top: 10px;">
-                                    <li>Screening anuales de salud preventiva: presión arterial, glucosa, colesterol, IMC, grasa visceral</li>
-                                    <li>Vacunación anual contra influenza en instalaciones de la empresa (cobertura >80%)</li>
-                                    <li>Programa de monitoreo de calidad de sueño con recomendaciones personalizadas (uso de wearables)</li>
-                                    <li>Consultas de medicina preventiva semestrales con médico ocupacional</li>
-                                    <li>Programa de cesación de tabaquismo con acompañamiento psicológico (6 meses)</li>
-                                    <li>Medición de impacto: reducción de factores de riesgo, ausentismo, costos médicos, productividad</li>
+                                    <li>Instalar chequeos preventivos anuales como parte de la rutina, no como una excepción</li>
                                 </ul>
                             </div>
-                            
+
                             <p style="margin-top: 20px; padding: 15px; background: #f3e6f7; border-radius: 8px;">
-                                <strong style="color: #8F579F;">🎯 Meta de 6 meses:</strong> Reducir en 25% el porcentaje de colaboradores con 2+ factores de riesgo metabólico, disminuir ausentismo en 20%, incrementar participación en programas de bienestar físico al 60%.
+                                <strong style="color: #8F579F;">🎯 Meta de 6 meses:</strong> Menos personas con factores de riesgo acumulados, y más participación sostenida en los programas de salud que ya ofreces.
                             </p>
                         </div>
                     `
                 },
                 sostenibilidad: {
-                    titulo: 'Sostenibilidad: El Sistema Nervioso del Bienestar',
-                    impacto: 'Sin una estrategia formal de bienestar con gobernanza, presupuesto y equipo dedicado, todo lo demás son parches temporales. Esta dimensión determina si las mejoras serán sostenibles o desaparecerán con el próximo cambio de prioridades. Es la diferencia entre transformación real y teatro corporativo.',
-                    costoInaccion: 'Deloitte Human Capital Trends reporta que organizaciones sin estrategia formal de bienestar tienen 70% de probabilidad de abandono de programas en 18 meses. El dinero invertido se desperdicia, la credibilidad se pierde, y los colaboradores se vuelven cínicos ante nuevas iniciativas.',
+                    titulo: 'Sostenibilidad: lo que sostiene a todo lo demás',
+                    impacto: 'Sin gobernanza, presupuesto y un responsable claro, cualquier avance en las otras cinco dimensiones es temporal. Esta es la dimensión que decide si lo que construiste dura, o se diluye con el próximo cambio de prioridades.',
+                    costoInaccion: 'Willis Towers Watson encontró que hoy solo 11% de las empresas trata el bienestar como un elemento fundacional de su estrategia de capital humano, aunque 37% planea hacerlo en los próximos tres años. Quien se mueve primero, en esto, se queda con la ventaja.',
                     rutaDetallada: `
                         <div style="background: white; padding: 20px; border-radius: 10px; margin: 15px 0;">
                             <h4 style="color: #8F579F; margin-bottom: 15px;">📍 RUTA DE TRANSFORMACIÓN DETALLADA</h4>
-                            
+
                             <div style="background: #ffebee; padding: 15px; border-radius: 8px; margin: 10px 0; border-left: 4px solid #f44336;">
-                                <strong style="color: #d32f2f;">SEMANAS 1-4: GOBERNANZA Y ESTRUCTURA</strong>
+                                <strong style="color: #d32f2f;">SEMANAS 1-4: GOBERNANZA</strong>
                                 <ul style="margin-left: 20px; margin-top: 10px;">
-                                    <li>Presentar resultados del assessment a Junta Directiva/Comité Ejecutivo con análisis de ROI</li>
-                                    <li>Obtener compromiso visible de CEO/alta dirección: comunicado oficial sobre prioridad de bienestar</li>
-                                    <li>Crear rol de Chief Wellbeing Officer o Gerente de Bienestar con reporte directo a CEO/CHRO</li>
-                                    <li>Asignar presupuesto específico de bienestar (benchmark: 2-4% de nómina total anual)</li>
-                                    <li>Conformar equipo dedicado: 1 persona por cada 250 colaboradores (mínimo)</li>
-                                    <li>Crear Comité de Bienestar con representación cross-funcional y de todos los niveles</li>
+                                    <li>Llevar estos resultados a la alta dirección y nombrar a alguien responsable del bienestar con acceso real a quien decide</li>
                                 </ul>
                             </div>
-                            
+
                             <div style="background: #fff3e0; padding: 15px; border-radius: 8px; margin: 10px 0; border-left: 4px solid #ff9800;">
-                                <strong style="color: #f57c00;">SEMANAS 5-12: ESTRATEGIA Y POLÍTICAS</strong>
+                                <strong style="color: #f57c00;">SEMANAS 5-12: ESTRATEGIA</strong>
                                 <ul style="margin-left: 20px; margin-top: 10px;">
-                                    <li>Desarrollar estrategia de bienestar 2025-2028: visión, objetivos, KPIs, roadmap, presupuesto</li>
-                                    <li>Alinear estrategia de bienestar con estrategia de negocio (bienestar no es CSR, es core business)</li>
-                                    <li>Crear o actualizar políticas críticas: anti-discriminación, anti-acoso, equidad de género, inclusión</li>
-                                    <li>Implementar protocolo de denuncia seguro y confidencial con investigación externa</li>
-                                    <li>Establecer meta de equidad de género: representación 40-60% en todos los niveles para 2027</li>
-                                    <li>Auditoría de equidad salarial de género con corrección de brechas >3%</li>
-                                    <li>Crear y difundir código de ética/principios de negocio entre stakeholders</li>
+                                    <li>Formalizar una estrategia de bienestar a tres años, con objetivos e indicadores claros, alineada al negocio</li>
                                 </ul>
                             </div>
-                            
+
                             <div style="background: #e3f2fd; padding: 15px; border-radius: 8px; margin: 10px 0; border-left: 4px solid #2196f3;">
-                                <strong style="color: #1976d2;">MESES 4-6: CULTURA Y COMPROMISO</strong>
+                                <strong style="color: #1976d2;">MESES 4-6: CULTURA</strong>
                                 <ul style="margin-left: 20px; margin-top: 10px;">
-                                    <li>Implementar programa 3R (reducir, reutilizar, reciclar) con metas cuantificables anuales</li>
-                                    <li>Eliminar plásticos de un solo uso en todas las instalaciones</li>
-                                    <li>Programa de voluntariado corporativo con causa de largo plazo (no eventos aislados para foto)</li>
-                                    <li>Medir huella de carbono organizacional y comprometerse a neutralidad para 2030</li>
-                                    <li>Integrar criterios ESG en evaluación de proveedores y socios de negocio</li>
-                                    <li>Dashboard de bienestar en tiempo real visible para Junta Directiva con revisión trimestral</li>
-                                    <li>Comunicación permanente de avances, historias de éxito y aprendizajes</li>
+                                    <li>Comunicar avances de forma constante, para que el bienestar deje de sentirse como una campaña y se sienta como una prioridad real</li>
                                 </ul>
                             </div>
-                            
+
                             <p style="margin-top: 20px; padding: 15px; background: #f3e6f7; border-radius: 8px;">
-                                <strong style="color: #8F579F;">🎯 Meta de 6 meses:</strong> Estrategia de bienestar aprobada y en ejecución, presupuesto asignado, equipo conformado, políticas actualizadas, indicadores en dashboard, percepción de que "el bienestar es prioridad real" en >70% de colaboradores.
+                                <strong style="color: #8F579F;">🎯 Meta de 6 meses:</strong> Una estrategia de bienestar aprobada, con presupuesto y responsable, y una percepción creciente de que el bienestar es prioridad real y no un discurso.
                             </p>
                         </div>
                     `
