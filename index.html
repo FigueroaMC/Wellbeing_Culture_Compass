@@ -811,13 +811,13 @@
         function generarAlertas(results) {
             const alertas = [];
             if (results.criticalDimensions.includes('liderazgo') && results.criticalDimensions.includes('saludMental')) {
-                alertas.push('<div class="alert-box danger"><h4>⚠️ ALERTA CRÍTICA: Liderazgo + Salud Mental</h4><p>Riesgo de exodus masivo de talento. Requiere intervención dual inmediata.</p></div>');
+                alertas.push('<div class="alert-box danger"><h4>⚠️ ALERTA CRÍTICA: Liderazgo + Salud Mental</h4><p>El McKinsey Health Institute ya lo mostró: el liderazgo es lo que más determina la seguridad psicológica de un equipo. Si al mismo tiempo tu salud mental está en crisis, no hay narrativa de bienestar que sostenga esto — actúa en las dos a la vez, no una primero y la otra después.</p></div>');
             }
             if (results.criticalDimensions.includes('bienestarFinanciero') && results.criticalDimensions.includes('desarrolloProfesional')) {
-                alertas.push('<div class="alert-box danger"><h4>⚠️ ALERTA CRÍTICA: Bienestar Financiero + Desarrollo</h4><p>Sin perspectiva económica ni profesional. Predictor #1 de rotación según LinkedIn.</p></div>');
+                alertas.push('<div class="alert-box danger"><h4>⚠️ ALERTA CRÍTICA: Bienestar Financiero + Desarrollo</h4><p>Willis Towers Watson encontró que el bienestar financiero es la principal preocupación de las personas, y McKinsey & Company confirma que la falta de desarrollo es la razón número uno que dan cuando renuncian. Cuando fallan las dos al mismo tiempo, no le queda a tu gente ninguna razón racional para quedarse.</p></div>');
             }
             if (results.criticalDimensions.includes('sostenibilidad')) {
-                alertas.push('<div class="alert-box danger"><h4>⚠️ ALERTA ESTRUCTURAL: Sostenibilidad Comprometida</h4><p>Sin estrategia y recursos, cualquier mejora será temporal.</p></div>');
+                alertas.push('<div class="alert-box danger"><h4>⚠️ ALERTA ESTRUCTURAL: Sostenibilidad Comprometida</h4><p>Sin gobernanza ni presupuesto asignado, cualquier mejora en las otras dimensiones es temporal — se diluye con el próximo cambio de prioridades.</p></div>');
             }
             if (alertas.length === 0) return '';
             return '<h3 class="section-title" style="margin-top:40px;">🚨 Alertas Críticas</h3>' + alertas.join('');
