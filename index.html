@@ -251,7 +251,7 @@
         }
         @media print {
             body { background: white; }
-            .btn { display: none; }
+            .btn, .print-hint { display: none; }
         }
     </style>
 </head>
@@ -320,11 +320,15 @@
             <div id="resultsContent"></div>
             <p style="margin-top: 30px; line-height: 1.8; color: #333;">Si necesitas del acompañamiento de nuestro equipo para cerrar las brechas y atender las dimensiones críticas que encontraste en este diagnóstico, agendemos una videollamada y exploremos juntos el plan de acción.</p>
             <div style="margin-top: 15px; display: flex; gap: 15px; flex-wrap: wrap;">
+                <button class="btn" onclick="window.print()" style="background: linear-gradient(135deg, #44aaff 0%, #47c0ef 100%);">
+                    📥 Descargar mis resultados (PDF)
+                </button>
                 <button class="btn" onclick="location.reload()">Nueva Evaluación</button>
                 <button class="btn" onclick="window.open(CAL_URL, '_blank', 'noopener')" style="background: linear-gradient(135deg, #47c0ef 0%, #8F579F 100%);">
                     📅 Agendar Reunión con Nuestro Equipo
                 </button>
             </div>
+            <p class="print-hint" style="margin-top: 10px; font-size: 13px; color: #888;">Se abrirá el cuadro de impresión de tu navegador — elige "Guardar como PDF" como destino.</p>
         </div>
 
         <div class="footer">© 2025 Paradigma B. Todos los derechos reservados.</div>
