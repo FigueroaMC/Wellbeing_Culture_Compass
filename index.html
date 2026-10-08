@@ -798,7 +798,7 @@
                     </div>
                     <div class="metric-card">
                         <div class="metric-label">Meta 18 Meses</div>
-                        <div class="metric-value" style="color:#47c0ef;">${(results.globalPercentage + 20).toFixed(1)}%</div>
+                        <div class="metric-value" style="color:#47c0ef;">${Math.min(results.globalPercentage + 20, 100).toFixed(1)}%</div>
                     </div>
                 </div>
                 <div class="insight-box">
